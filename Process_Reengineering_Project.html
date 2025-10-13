@@ -176,6 +176,16 @@
             font-weight: bold;
         }
         
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
         /* Main Content */
         .main-content {
             flex: 1;
@@ -533,10 +543,207 @@
             font-size: 0.7rem;
         }
         
-        /* Responsive */
-        @media (max-width: 1200px) {
+        /* Mobile Styles */
+        @media (max-width: 992px) {
+            .logo {
+                font-size: 1.1rem;
+                margin-right: 15px;
+            }
+            
+            .nav-item {
+                padding: 0 10px;
+                font-size: 0.9rem;
+            }
+            
             .analysis-panel {
                 width: 300px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .top-nav {
+                padding: 0 15px;
+            }
+            
+            .logo span {
+                display: none;
+            }
+            
+            .logo {
+                margin-right: 10px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                margin-right: 15px;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: var(--nav-height);
+                left: 0;
+                width: 100%;
+                background-color: var(--primary-dark);
+                flex-direction: column;
+                height: auto;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s;
+                z-index: 1000;
+            }
+            
+            .nav-menu.active {
+                transform: translateY(0);
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .nav-item {
+                height: auto;
+                padding: 15px 20px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .nav-item.has-dropdown::after {
+                margin-left: auto;
+            }
+            
+            .dropdown {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                background-color: rgba(0,0,0,0.2);
+                color: white;
+                display: none;
+            }
+            
+            .dropdown-item {
+                color: white;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .dropdown-item:hover {
+                background-color: rgba(255,255,255,0.1);
+            }
+            
+            .dropdown-item i {
+                color: white;
+            }
+            
+            .nav-item.active .dropdown {
+                display: block;
+            }
+            
+            .user-profile span {
+                display: none;
+            }
+            
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .analysis-panel {
+                width: 100%;
+                height: 40vh;
+                border-left: none;
+                border-top: 1px solid #e2e8f0;
+            }
+            
+            .canvas-container {
+                height: 60vh;
+            }
+            
+            .canvas-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .canvas-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .btn {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .btn span {
+                display: none;
+            }
+            
+            .status-bar {
+                flex-wrap: wrap;
+                height: auto;
+                padding: 8px 15px;
+            }
+            
+            .status-item {
+                margin-right: 15px;
+                margin-bottom: 5px;
+            }
+            
+            .process-node {
+                width: 140px;
+                padding: 12px;
+            }
+            
+            .process-node.decision {
+                width: 110px;
+                height: 110px;
+            }
+            
+            .node-title {
+                font-size: 0.9rem;
+            }
+            
+            .node-text {
+                font-size: 0.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1rem;
+            }
+            
+            .canvas-title {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 6px 10px;
+            }
+            
+            .process-node {
+                width: 120px;
+                padding: 10px;
+            }
+            
+            .process-node.decision {
+                width: 90px;
+                height: 90px;
+            }
+            
+            .node-title {
+                font-size: 0.8rem;
+            }
+            
+            .node-text {
+                font-size: 0.7rem;
+            }
+            
+            .kpi-cards {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .panel-content {
+                padding: 15px;
             }
         }
         
@@ -585,11 +792,14 @@
         <!-- Top Navigation -->
         <nav class="top-nav">
             <div class="nav-left">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
                 <div class="logo">
                     <i class="fas fa-project-diagram"></i>
-                    Process Reengineering Studio
+                    <span>Process Reengineering</span>
                 </div>
-                <ul class="nav-menu">
+                <ul class="nav-menu" id="navMenu">
                     <li class="nav-item has-dropdown">
                         File
                         <div class="dropdown">
@@ -663,57 +873,57 @@
                     <div class="canvas-actions">
                         <button class="btn">
                             <i class="fas fa-undo"></i>
-                            Undo
+                            <span>Undo</span>
                         </button>
                         <button class="btn">
                             <i class="fas fa-redo"></i>
-                            Redo
+                            <span>Redo</span>
                         </button>
                         <button class="btn btn-primary" id="simulateBtn">
                             <i class="fas fa-play"></i>
-                            Simulate Process
+                            <span>Simulate</span>
                         </button>
                         <button class="btn btn-success" id="reengineerBtn">
                             <i class="fas fa-bolt"></i>
-                            Reengineer
+                            <span>Reengineer</span>
                         </button>
                     </div>
                 </div>
                 <div class="process-canvas" id="processCanvas">
                     <!-- Process Nodes -->
-                    <div class="process-node start" style="top: 50px; left: 100px;">
+                    <div class="process-node start" style="top: 50px; left: 5%;">
                         <div class="node-title">Receive Order</div>
                         <div class="node-text">Order intake process</div>
                         <div class="node-badge">1</div>
                     </div>
                     
-                    <div class="process-node decision" style="top: 50px; left: 350px;">
+                    <div class="process-node decision" style="top: 50px; left: 35%;">
                         <div class="node-text">Is it valid?</div>
                         <div class="node-badge">2</div>
                     </div>
                     
-                    <div class="process-node action" style="top: 50px; left: 600px;">
+                    <div class="process-node action" style="top: 50px; left: 65%;">
                         <div class="node-title">Fulfill Order</div>
                         <div class="node-text">Process and ship</div>
                         <div class="node-badge">3</div>
                     </div>
                     
-                    <div class="process-node end" style="top: 200px; left: 350px;">
+                    <div class="process-node end" style="top: 200px; left: 35%;">
                         <div class="node-title">Reject</div>
                         <div class="node-text">Invalid order</div>
                         <div class="node-badge">4</div>
                     </div>
                     
                     <!-- Connectors -->
-                    <div class="connector horizontal" style="top: 75px; left: 260px; width: 90px;"></div>
-                    <div class="connector-arrow" style="top: 71px; left: 345px;"></div>
+                    <div class="connector horizontal" style="top: 75px; left: 20%; width: 15%;"></div>
+                    <div class="connector-arrow" style="top: 71px; left: 34%;"></div>
                     
-                    <div class="connector horizontal" style="top: 75px; left: 480px; width: 120px;"></div>
-                    <div class="connector-arrow" style="top: 71px; left: 595px;"></div>
+                    <div class="connector horizontal" style="top: 75px; left: 50%; width: 15%;"></div>
+                    <div class="connector-arrow" style="top: 71px; left: 64%;"></div>
                     
-                    <div class="connector vertical" style="top: 75px; left: 410px; height: 150px;"></div>
-                    <div class="connector horizontal" style="top: 225px; left: 410px; width: 60px;"></div>
-                    <div class="connector-arrow" style="top: 221px; left: 465px; transform: rotate(90deg);"></div>
+                    <div class="connector vertical" style="top: 75px; left: 42%; height: 150px;"></div>
+                    <div class="connector horizontal" style="top: 225px; left: 42%; width: 8%;"></div>
+                    <div class="connector-arrow" style="top: 221px; left: 49%; transform: rotate(90deg);"></div>
                 </div>
             </div>
             
@@ -819,6 +1029,24 @@
     </div>
 
     <script>
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+        });
+        
+        // Mobile dropdown functionality
+        document.querySelectorAll('.nav-item.has-dropdown').forEach(item => {
+            item.addEventListener('click', function(e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    this.classList.toggle('active');
+                }
+            });
+        });
+        
         // Make process nodes draggable
         document.querySelectorAll('.process-node').forEach(node => {
             let isDragging = false;
@@ -830,14 +1058,22 @@
             let yOffset = 0;
             
             node.addEventListener("mousedown", dragStart);
+            node.addEventListener("touchstart", dragStart);
             document.addEventListener("mousemove", drag);
+            document.addEventListener("touchmove", drag);
             document.addEventListener("mouseup", dragEnd);
+            document.addEventListener("touchend", dragEnd);
             
             function dragStart(e) {
-                initialX = e.clientX - xOffset;
-                initialY = e.clientY - yOffset;
+                if (e.type === "touchstart") {
+                    initialX = e.touches[0].clientX - xOffset;
+                    initialY = e.touches[0].clientY - yOffset;
+                } else {
+                    initialX = e.clientX - xOffset;
+                    initialY = e.clientY - yOffset;
+                }
                 
-                if (e.target === node) {
+                if (e.target === node || node.contains(e.target)) {
                     isDragging = true;
                     node.style.zIndex = "1000";
                     node.classList.add('pulse');
@@ -847,8 +1083,14 @@
             function drag(e) {
                 if (isDragging) {
                     e.preventDefault();
-                    currentX = e.clientX - initialX;
-                    currentY = e.clientY - initialY;
+                    
+                    if (e.type === "touchmove") {
+                        currentX = e.touches[0].clientX - initialX;
+                        currentY = e.touches[0].clientY - initialY;
+                    } else {
+                        currentX = e.clientX - initialX;
+                        currentY = e.clientY - initialY;
+                    }
                     
                     xOffset = currentX;
                     yOffset = currentY;
@@ -897,194 +1139,81 @@
                 this.classList.add('active');
                 
                 // Update panel content based on active tab
-                const panelContent = document.querySelector('.panel-content');
-                if (this.textContent === 'Current Process') {
-                    panelContent.innerHTML = `
-                        <div class="kpi-cards">
-                            <div class="kpi-card">
-                                <div class="kpi-value">10 Days</div>
-                                <div class="kpi-label">Cycle Time</div>
-                            </div>
-                            <div class="kpi-card">
-                                <div class="kpi-value">$45.10</div>
-                                <div class="kpi-label">Avg. Cost</div>
-                            </div>
-                        </div>
-                        
-                        <div class="panel-title">Process Metrics</div>
-                        
-                        <ul class="metrics-list">
-                            <li class="metric-item">
-                                <span class="metric-label">Process Cost</span>
-                                <span class="metric-value">$45.10</span>
-                            </li>
-                            <li class="metric-item">
-                                <span class="metric-label">Cycle Time</span>
-                                <span class="metric-value">10 Days</span>
-                            </li>
-                            <li class="metric-item">
-                                <span class="metric-label">Throughput</span>
-                                <span class="metric-value">42 orders/day</span>
-                            </li>
-                            <li class="metric-item">
-                                <span class="metric-label">Error Rate</span>
-                                <span class="metric-value">3.2%</span>
-                            </li>
-                        </ul>
-                        
-                        <div class="panel-title">Identified Bottlenecks</div>
-                        
-                        <div class="bottleneck-item">
-                            <div class="bottleneck-title">Manual Order Validation</div>
-                            <div class="bottleneck-desc">Step 2 requires manual review of all orders, adding 2 days to cycle time</div>
-                        </div>
-                        
-                        <div class="bottleneck-item">
-                            <div class="bottleneck-title">Inventory System Integration</div>
-                            <div class="bottleneck-desc">Step 3 requires manual checks across multiple systems</div>
-                        </div>
-                        
-                        <div id="optimizationResults" style="display: none;">
-                            <div class="simulation-results">
-                                <div class="results-title">Reengineering Results</div>
-                                <div class="result-item">
-                                    <span>Process Cycle Time:</span>
-                                    <span class="result-improvement">Reduced from 10 days to 5 days</span>
-                                </div>
-                                <div class="result-item">
-                                    <span>Process Cost:</span>
-                                    <span class="result-improvement">Reduced from $45.10 to $28.75</span>
-                                </div>
-                                <div class="result-item">
-                                    <span>Throughput:</span>
-                                    <span class="result-improvement">Increased from 42 to 68 orders/day</span>
-                                </div>
-                                <div class="result-item">
-                                    <span>Error Rate:</span>
-                                    <span class="result-improvement">Reduced from 3.2% to 1.1%</span>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                } else if (this.textContent === 'Optimized Process') {
-                    panelContent.innerHTML = `
-                        <div class="kpi-cards">
-                            <div class="kpi-card">
-                                <div class="kpi-value">5 Days</div>
-                                <div class="kpi-label">Cycle Time</div>
-                            </div>
-                            <div class="kpi-card">
-                                <div class="kpi-value">$28.75</div>
-                                <div class="kpi-label">Avg. Cost</div>
-                            </div>
-                        </div>
-                        
-                        <div class="panel-title">Optimized Process Metrics</div>
-                        
-                        <ul class="metrics-list">
-                            <li class="metric-item">
-                                <span class="metric-label">Process Cost</span>
-                                <span class="metric-value">$28.75 <span style="color: var(--success);">(-36%)</span></span>
-                            </li>
-                            <li class="metric-item">
-                                <span class="metric-label">Cycle Time</span>
-                                <span class="metric-value">5 Days <span style="color: var(--success);">(-50%)</span></span>
-                            </li>
-                            <li class="metric-item">
-                                <span class="metric-label">Throughput</span>
-                                <span class="metric-value">68 orders/day <span style="color: var(--success);">(+62%)</span></span>
-                            </li>
-                            <li class="metric-item">
-                                <span class="metric-label">Error Rate</span>
-                                <span class="metric-value">1.1% <span style="color: var(--success);">(-66%)</span></span>
-                            </li>
-                        </ul>
-                        
-                        <div class="panel-title">Improvements Applied</div>
-                        
-                        <div class="improvement-card">
-                            <div class="improvement-title">Automated Validation</div>
-                            <div class="improvement-desc">Step 2 now uses AI-based validation, reducing manual work by 80%</div>
-                        </div>
-                        
-                        <div class="improvement-card">
-                            <div class="improvement-title">Integrated Systems</div>
-                            <div class="improvement-desc">Step 3 now uses a unified inventory system with real-time updates</div>
-                        </div>
-                        
-                        <div class="improvement-card">
-                            <div class="improvement-title">Parallel Processing</div>
-                            <div class="improvement-desc">Multiple steps now run concurrently instead of sequentially</div>
-                        </div>
-                    `;
-                } else if (this.textContent === 'Bottlenecks') {
-                    panelContent.innerHTML = `
-                        <div class="panel-title">Process Bottlenecks</div>
-                        
-                        <div class="bottleneck-item">
-                            <div class="bottleneck-title">Manual Order Validation (Step 2)</div>
-                            <div class="bottleneck-desc">Manual validation process adds 2 days to cycle time. 35% of orders require manual review.</div>
-                        </div>
-                        
-                        <div class="bottleneck-item">
-                            <div class="bottleneck-title">Inventory Check (Step 3)</div>
-                            <div class="bottleneck-desc">Cross-system inventory verification causes 1.5 days delay. System integration issues identified.</div>
-                        </div>
-                        
-                        <div class="bottleneck-item">
-                            <div class="bottleneck-title">Approval Workflow</div>
-                            <div class="bottleneck-desc">Multi-level approval for orders over $500 adds 1.2 days to process time.</div>
-                        </div>
-                        
-                        <div class="panel-title" style="margin-top: 25px;">Optimization Suggestions</div>
-                        
-                        <ul class="metrics-list">
-                            <li class="metric-item">
-                                <span class="metric-label">Automate validation</span>
-                                <span class="metric-value">Save 1.8 days</span>
-                            </li>
-                            <li class="metric-item">
-                                <span class="metric-label">Improve system integration</span>
-                                <span class="metric-value">Save 1.2 days</span>
-                            </li>
-                            <li class="metric-item">
-                                <span class="metric-label">Streamline approval</span>
-                                <span class="metric-value">Save 0.8 days</span>
-                            </li>
-                        </ul>
-                    `;
-                }
+                updatePanelContent(this.textContent);
             });
         });
         
-        // Reengineer button functionality
-        document.getElementById('reengineerBtn').addEventListener('click', function() {
-            const buttons = document.querySelectorAll('.canvas-actions .btn');
-            buttons.forEach(btn => {
-                btn.disabled = true;
-            });
-            
-            this.innerHTML = '<i class="fas fa-cog fa-spin"></i> Reengineering...';
-            
-            // Simulate processing delay
-            setTimeout(() => {
-                this.innerHTML = '<i class="fas fa-check"></i> Reengineered!';
-                this.style.backgroundColor = 'var(--success)';
-                this.style.borderColor = 'var(--success)';
-                
-                // Show optimization results
-                document.getElementById('optimizationResults').style.display = 'block';
-                
-                // Switch to Optimized Process tab
-                document.querySelectorAll('.panel-tab').forEach(tab => {
-                    tab.classList.remove('active');
-                    if (tab.textContent === 'Optimized Process') {
-                        tab.classList.add('active');
-                    }
-                });
-                
-                // Update panel content to show optimized process
-                const panelContent = document.querySelector('.panel-content');
+        function updatePanelContent(tabName) {
+            const panelContent = document.querySelector('.panel-content');
+            if (tabName === 'Current Process') {
+                panelContent.innerHTML = `
+                    <div class="kpi-cards">
+                        <div class="kpi-card">
+                            <div class="kpi-value">10 Days</div>
+                            <div class="kpi-label">Cycle Time</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-value">$45.10</div>
+                            <div class="kpi-label">Avg. Cost</div>
+                        </div>
+                    </div>
+                    
+                    <div class="panel-title">Process Metrics</div>
+                    
+                    <ul class="metrics-list">
+                        <li class="metric-item">
+                            <span class="metric-label">Process Cost</span>
+                            <span class="metric-value">$45.10</span>
+                        </li>
+                        <li class="metric-item">
+                            <span class="metric-label">Cycle Time</span>
+                            <span class="metric-value">10 Days</span>
+                        </li>
+                        <li class="metric-item">
+                            <span class="metric-label">Throughput</span>
+                            <span class="metric-value">42 orders/day</span>
+                        </li>
+                        <li class="metric-item">
+                            <span class="metric-label">Error Rate</span>
+                            <span class="metric-value">3.2%</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="panel-title">Identified Bottlenecks</div>
+                    
+                    <div class="bottleneck-item">
+                        <div class="bottleneck-title">Manual Order Validation</div>
+                        <div class="bottleneck-desc">Step 2 requires manual review of all orders, adding 2 days to cycle time</div>
+                    </div>
+                    
+                    <div class="bottleneck-item">
+                        <div class="bottleneck-title">Inventory System Integration</div>
+                        <div class="bottleneck-desc">Step 3 requires manual checks across multiple systems</div>
+                    </div>
+                    
+                    <div id="optimizationResults" style="display: none;">
+                        <div class="simulation-results">
+                            <div class="results-title">Reengineering Results</div>
+                            <div class="result-item">
+                                <span>Process Cycle Time:</span>
+                                <span class="result-improvement">Reduced from 10 days to 5 days</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Process Cost:</span>
+                                <span class="result-improvement">Reduced from $45.10 to $28.75</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Throughput:</span>
+                                <span class="result-improvement">Increased from 42 to 68 orders/day</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Error Rate:</span>
+                                <span class="result-improvement">Reduced from 3.2% to 1.1%</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (tabName === 'Optimized Process') {
                 panelContent.innerHTML = `
                     <div class="kpi-cards">
                         <div class="kpi-card">
@@ -1135,13 +1264,80 @@
                         <div class="improvement-desc">Multiple steps now run concurrently instead of sequentially</div>
                     </div>
                 `;
+            } else if (tabName === 'Bottlenecks') {
+                panelContent.innerHTML = `
+                    <div class="panel-title">Process Bottlenecks</div>
+                    
+                    <div class="bottleneck-item">
+                        <div class="bottleneck-title">Manual Order Validation (Step 2)</div>
+                        <div class="bottleneck-desc">Manual validation process adds 2 days to cycle time. 35% of orders require manual review.</div>
+                    </div>
+                    
+                    <div class="bottleneck-item">
+                        <div class="bottleneck-title">Inventory Check (Step 3)</div>
+                        <div class="bottleneck-desc">Cross-system inventory verification causes 1.5 days delay. System integration issues identified.</div>
+                    </div>
+                    
+                    <div class="bottleneck-item">
+                        <div class="bottleneck-title">Approval Workflow</div>
+                        <div class="bottleneck-desc">Multi-level approval for orders over $500 adds 1.2 days to process time.</div>
+                    </div>
+                    
+                    <div class="panel-title" style="margin-top: 25px;">Optimization Suggestions</div>
+                    
+                    <ul class="metrics-list">
+                        <li class="metric-item">
+                            <span class="metric-label">Automate validation</span>
+                            <span class="metric-value">Save 1.8 days</span>
+                        </li>
+                        <li class="metric-item">
+                            <span class="metric-label">Improve system integration</span>
+                            <span class="metric-value">Save 1.2 days</span>
+                        </li>
+                        <li class="metric-item">
+                            <span class="metric-label">Streamline approval</span>
+                            <span class="metric-value">Save 0.8 days</span>
+                        </li>
+                    </ul>
+                `;
+            }
+        }
+        
+        // Reengineer button functionality
+        document.getElementById('reengineerBtn').addEventListener('click', function() {
+            const buttons = document.querySelectorAll('.canvas-actions .btn');
+            buttons.forEach(btn => {
+                btn.disabled = true;
+            });
+            
+            this.innerHTML = '<i class="fas fa-cog fa-spin"></i> <span>Reengineering...</span>';
+            
+            // Simulate processing delay
+            setTimeout(() => {
+                this.innerHTML = '<i class="fas fa-check"></i> <span>Reengineered!</span>';
+                this.style.backgroundColor = 'var(--success)';
+                this.style.borderColor = 'var(--success)';
+                
+                // Show optimization results
+                document.getElementById('optimizationResults').style.display = 'block';
+                
+                // Switch to Optimized Process tab
+                document.querySelectorAll('.panel-tab').forEach(tab => {
+                    tab.classList.remove('active');
+                    if (tab.textContent === 'Optimized Process') {
+                        tab.classList.add('active');
+                    }
+                });
+                
+                // Update panel content to show optimized process
+                updatePanelContent('Optimized Process');
                 
                 // Re-enable buttons after a delay
                 setTimeout(() => {
                     buttons.forEach(btn => {
                         btn.disabled = false;
                     });
-                    this.innerHTML = '<i class="fas fa-bolt"></i> Reengineer';
+                    this.innerHTML = '<i class="fas fa-bolt"></i> <span>Reengineer</span>';
                     this.style.backgroundColor = '';
                     this.style.borderColor = '';
                 }, 3000);
@@ -1155,11 +1351,11 @@
                 btn.disabled = true;
             });
             
-            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Simulating...';
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Simulating...</span>';
             
             // Simulate processing delay
             setTimeout(() => {
-                this.innerHTML = '<i class="fas fa-check"></i> Simulation Complete';
+                this.innerHTML = '<i class="fas fa-check"></i> <span>Simulation Complete</span>';
                 this.style.backgroundColor = 'var(--success)';
                 this.style.borderColor = 'var(--success)';
                 
@@ -1168,7 +1364,7 @@
                     buttons.forEach(btn => {
                         btn.disabled = false;
                     });
-                    this.innerHTML = '<i class="fas fa-play"></i> Simulate Process';
+                    this.innerHTML = '<i class="fas fa-play"></i> <span>Simulate</span>';
                     this.style.backgroundColor = '';
                     this.style.borderColor = '';
                 }, 2000);

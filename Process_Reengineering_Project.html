@@ -176,6 +176,71 @@
             font-weight: bold;
         }
         
+        .bahrain-flag {
+            display: flex;
+            align-items: center;
+            margin-left: 30px;
+            font-size: 1rem;
+            color: white;
+        }
+        
+        .bahrain-flag i {
+            margin-right: 8px;
+            color: #fff;
+            font-size: 1.2rem;
+        }
+        
+        .dark-mode-toggle {
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: var(--accent);
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
         /* Mobile menu button */
         .mobile-menu-btn {
             display: none;
@@ -604,6 +669,11 @@
             .analysis-panel {
                 width: 300px;
             }
+            
+            .bahrain-flag {
+                margin-left: 15px;
+                font-size: 0.9rem;
+            }
         }
         
         @media (max-width: 768px) {
@@ -685,6 +755,14 @@
             
             .user-profile span {
                 display: none;
+            }
+            
+            .bahrain-flag {
+                display: none;
+            }
+            
+            .dark-mode-toggle {
+                margin-right: 10px;
             }
             
             .main-content {
@@ -914,6 +992,65 @@
             min-height: 120px;
             resize: vertical;
         }
+        
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #1a202c;
+            color: #e2e8f0;
+        }
+        
+        body.dark-mode .top-nav {
+            background-color: #2d3748;
+        }
+        
+        body.dark-mode .process-canvas,
+        body.dark-mode .analysis-panel,
+        body.dark-mode .kpi-card,
+        body.dark-mode .process-node {
+            background-color: #2d3748;
+            color: #e2e8f0;
+        }
+        
+        body.dark-mode .canvas-title,
+        body.dark-mode .panel-title,
+        body.dark-mode .node-title,
+        body.dark-mode .metric-value {
+            color: #e2e8f0;
+        }
+        
+        body.dark-mode .node-text,
+        body.dark-mode .metric-label,
+        body.dark-mode .kpi-label,
+        body.dark-mode .bottleneck-desc,
+        body.dark-mode .improvement-desc {
+            color: #a0aec0;
+        }
+        
+        body.dark-mode .btn {
+            background-color: #4a5568;
+            color: #e2e8f0;
+            border-color: #4a5568;
+        }
+        
+        body.dark-mode .btn:hover {
+            background-color: #2d3748;
+        }
+        
+        body.dark-mode .modal-content {
+            background-color: #2d3748;
+            color: #e2e8f0;
+        }
+        
+        body.dark-mode .form-control {
+            background-color: #4a5568;
+            border-color: #4a5568;
+            color: #e2e8f0;
+        }
+        
+        body.dark-mode .form-control.gray {
+            background-color: #4a5568;
+            color: #a0aec0;
+        }
     </style>
 </head>
 <body>
@@ -982,34 +1119,25 @@
                             </div>
                         </div>
                     </li>
-                    <li class="nav-item has-dropdown">
-                        Share
-                        <div class="dropdown">
-                            <div class="dropdown-item">
-                                <i class="fas fa-link"></i>
-                                Share via Link
-                            </div>
-                            <div class="divider"></div>
-                            <div class="dropdown-item">
-                                <i class="fas fa-file-pdf"></i>
-                                Export as PDF
-                            </div>
-                            <div class="dropdown-item">
-                                <i class="fas fa-image"></i>
-                                Export as PNG
-                            </div>
-                            <div class="dropdown-item">
-                                <i class="fas fa-project-diagram"></i>
-                                Export as BPMN
-                            </div>
-                        </div>
-                    </li>
                 </ul>
+                <div class="bahrain-flag">
+                    <i class="fas fa-flag"></i>
+                    <span>Kingdom of Bahrain</span>
+                </div>
             </div>
-            <div class="user-profile">
-                <div class="avatar">JS</div>
-                <span>John Smith</span>
-                <i class="fas fa-chevron-down"></i>
+            <div class="nav-right">
+                <div class="dark-mode-toggle">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="darkModeToggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span style="margin-left: 8px; font-size: 0.9rem;">Dark Mode</span>
+                </div>
+                <div class="user-profile">
+                    <div class="avatar">AQ</div>
+                    <span>Amro Qasim</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
             </div>
         </nav>
         
@@ -1018,7 +1146,7 @@
             <!-- Canvas Area -->
             <div class="canvas-container">
                 <div class="canvas-header">
-                    <div class="canvas-title">PROCESS REENGINEERING CANVAS</div>
+                    <div class="canvas-title">Order Processing</div>
                     <div class="canvas-actions">
                         <button class="btn">
                             <i class="fas fa-undo"></i>
@@ -1035,6 +1163,10 @@
                         <button class="btn btn-success" id="reengineerBtn">
                             <i class="fas fa-bolt"></i>
                             <span>Reengineer</span>
+                        </button>
+                        <button class="btn has-dropdown" id="shareBtn">
+                            <i class="fas fa-share-alt"></i>
+                            <span>Share</span>
                         </button>
                         <button class="btn btn-help" id="helpBtn">
                             <i class="fas fa-question-circle"></i>
@@ -1198,17 +1330,17 @@
                     { id: 1, type: 'start', title: 'Receive Order', text: 'Automated intake', x: 5, y: 10 },
                     { id: 2, type: 'action', title: 'Auto-Validation', text: 'AI-powered check', x: 25, y: 10 },
                     { id: 3, type: 'decision', title: 'Complex Cases', text: 'Needs review?', x: 45, y: 10 },
-                    { id: 4, type: 'action', title: 'Quick Review', text: 'Expert assessment', x: 30, y: 30 },
+                    { id: 4, type: 'action', title: 'Quick Review', text: 'Expert assessment', x: 30, y: 40 },
                     { id: 5, type: 'action', title: 'Fulfill Order', text: 'Automated process', x: 65, y: 10 },
-                    { id: 6, type: 'end', title: 'Reject', text: 'Invalid order', x: 65, y: 30 }
+                    { id: 6, type: 'end', title: 'Reject', text: 'Invalid order', x: 65, y: 40 }
                 ],
                 connectors: [
                     { from: 1, to: 2, type: 'horizontal', x1: 20, y1: 17.5, x2: 25, length: 5 },
                     { from: 2, to: 3, type: 'horizontal', x1: 30, y1: 17.5, x2: 45, length: 15 },
                     { from: 3, to: 5, type: 'horizontal', x1: 50, y1: 17.5, x2: 65, length: 15 },
-                    { from: 3, to: 4, type: 'vertical', x1: 47, y1: 17.5, x2: 30, length: 12.5 },
-                    { from: 4, to: 5, type: 'horizontal', x1: 35, y1: 32.5, x2: 65, length: 30 },
-                    { from: 4, to: 6, type: 'vertical', x1: 67, y1: 32.5, x2: 30, length: -2.5 }
+                    { from: 3, to: 4, type: 'vertical', x1: 47, y1: 17.5, x2: 40, length: 22.5 },
+                    { from: 4, to: 5, type: 'horizontal', x1: 35, y1: 42.5, x2: 65, length: 30 },
+                    { from: 4, to: 6, type: 'vertical', x1: 67, y1: 42.5, x2: 40, length: -2.5 }
                 ],
                 metrics: {
                     cycleTime: '5 Days',
@@ -1588,6 +1720,17 @@
                 currentProcessState = 'optimized';
                 renderProcess('optimized');
                 
+                // Switch to Optimized Process tab
+                document.querySelectorAll('.panel-tab').forEach(tab => {
+                    tab.classList.remove('active');
+                    if (tab.textContent === 'Optimized Process') {
+                        tab.classList.add('active');
+                    }
+                });
+                
+                // Update panel content to show optimized process
+                updatePanelContent('Optimized Process');
+                
                 // Show optimization results in current tab
                 document.getElementById('optimizationResults').style.display = 'block';
                 
@@ -1665,6 +1808,18 @@
                 // Reset form
                 document.getElementById('helpDetails').value = '';
             }, 2000);
+        });
+        
+        // Share button functionality
+        const shareBtn = document.getElementById('shareBtn');
+        shareBtn.addEventListener('click', function() {
+            alert('Share functionality would open here with options to export as PDF, PNG, BPMN or share via link');
+        });
+        
+        // Dark mode toggle functionality
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        darkModeToggle.addEventListener('change', function() {
+            document.body.classList.toggle('dark-mode', this.checked);
         });
         
         // Close modal when clicking outside

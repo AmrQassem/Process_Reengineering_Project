@@ -297,6 +297,7 @@
             font-size: 0.9rem;
             transition: all 0.3s;
             height: 36px;
+            color: var(--dark); /* Added to fix faded text */
         }
         
         .btn:hover {
@@ -1224,6 +1225,43 @@
         #duplicateShareButton {
             display: none;
         }
+        
+        /* Fix for share button dropdown arrow alignment */
+        #shareContainer .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Fix for faded buttons in light mode */
+        .btn:not(.btn-primary):not(.btn-success):not(.btn-help) {
+            color: var(--dark);
+            background-color: white;
+            border: 1px solid #e2e8f0;
+        }
+        
+        /* Dark mode styles for share dropdown */
+        body.dark-mode .share-dropdown {
+            background-color: #2d3748;
+            color: #e2e8f0;
+        }
+        
+        body.dark-mode .share-dropdown .dropdown-item {
+            color: #e2e8f0;
+            border-bottom-color: #4a5568;
+        }
+        
+        body.dark-mode .share-dropdown .dropdown-item:hover {
+            background-color: #4a5568;
+        }
+        
+        body.dark-mode .share-dropdown .dropdown-item i {
+            color: #e2e8f0;
+        }
+        
+        body.dark-mode .share-dropdown .divider {
+            background-color: #4a5568;
+        }
     </style>
 </head>
 <body>
@@ -1516,9 +1554,9 @@
                     { id: 4, type: 'end', title: 'Reject', text: 'Invalid order', x: 35, y: 40 }
                 ],
                 connectors: [
-                    { from: 1, to: 2, type: 'horizontal', x1: 21, y1: 17.5, x2: 35, length: 14 },
-                    { from: 2, to: 3, type: 'horizontal', x1: 51, y1: 17.5, x2: 65, length: 14 },
-                    { from: 2, to: 4, type: 'vertical', x1: 42, y1: 25, x2: 40, length: 15 }
+                    { from: 1, to: 2, type: 'horizontal', x1: 17, y1: 17.5, x2: 35, length: 18 },
+                    { from: 2, to: 3, type: 'horizontal', x1: 49, y1: 17.5, x2: 65, length: 16 },
+                    { from: 2, to: 4, type: 'vertical', x1: 42, y1: 24, x2: 40, length: 16 }
                 ],
                 metrics: {
                     cycleTime: '12 Days',
@@ -1537,11 +1575,11 @@
                     { id: 6, type: 'end', title: 'Reject', text: 'Invalid order', x: 65, y: 40 }
                 ],
                 connectors: [
-                    { from: 1, to: 2, type: 'horizontal', x1: 21, y1: 17.5, x2: 25, length: 4 },
-                    { from: 2, to: 3, type: 'horizontal', x1: 41, y1: 17.5, x2: 45, length: 4 },
-                    { from: 3, to: 5, type: 'horizontal', x1: 61, y1: 17.5, x2: 65, length: 4 },
-                    { from: 3, to: 4, type: 'vertical', x1: 47, y1: 25, x2: 40, length: 15 },
-                    { from: 4, to: 5, type: 'horizontal', x1: 46, y1: 42.5, x2: 65, length: 19 },
+                    { from: 1, to: 2, type: 'horizontal', x1: 17, y1: 17.5, x2: 25, length: 8 },
+                    { from: 2, to: 3, type: 'horizontal', x1: 39, y1: 17.5, x2: 45, length: 6 },
+                    { from: 3, to: 5, type: 'horizontal', x1: 59, y1: 17.5, x2: 65, length: 6 },
+                    { from: 3, to: 4, type: 'vertical', x1: 47, y1: 24, x2: 40, length: 16 },
+                    { from: 4, to: 5, type: 'horizontal', x1: 44, y1: 42.5, x2: 65, length: 21 },
                     { from: 4, to: 6, type: 'vertical', x1: 67, y1: 42.5, x2: 40, length: -2.5 }
                 ],
                 metrics: {
@@ -1563,9 +1601,9 @@
                     { id: 4, type: 'end', title: 'Reject', text: 'Invalid order', x: 5, y: 65 }
                 ],
                 connectors: [
-                    { from: 1, to: 2, type: 'vertical', x1: 12, y1: 18, x2: 25, length: 7 },
-                    { from: 2, to: 3, type: 'vertical', x1: 12, y1: 38, x2: 45, length: 7 },
-                    { from: 2, to: 4, type: 'vertical', x1: 8, y1: 38, x2: 65, length: 27 }
+                    { from: 1, to: 2, type: 'vertical', x1: 12, y1: 15, x2: 25, length: 10 },
+                    { from: 2, to: 3, type: 'vertical', x1: 12, y1: 40, x2: 45, length: 5 },
+                    { from: 2, to: 4, type: 'vertical', x1: 8, y1: 40, x2: 65, length: 25 }
                 ],
                 metrics: {
                     cycleTime: '12 Days',
@@ -1584,12 +1622,12 @@
                     { id: 6, type: 'end', title: 'Reject', text: 'Invalid order', x: 5, y: 80 }
                 ],
                 connectors: [
-                    { from: 1, to: 2, type: 'vertical', x1: 12, y1: 18, x2: 20, length: 2 },
-                    { from: 2, to: 3, type: 'vertical', x1: 12, y1: 33, x2: 35, length: 2 },
-                    { from: 3, to: 5, type: 'vertical', x1: 12, y1: 48, x2: 65, length: 17 },
-                    { from: 3, to: 4, type: 'vertical', x1: 8, y1: 48, x2: 50, length: 2 },
-                    { from: 4, to: 5, type: 'vertical', x1: 12, y1: 63, x2: 65, length: 2 },
-                    { from: 4, to: 6, type: 'vertical', x1: 8, y1: 63, x2: 80, length: 17 }
+                    { from: 1, to: 2, type: 'vertical', x1: 12, y1: 15, x2: 20, length: 5 },
+                    { from: 2, to: 3, type: 'vertical', x1: 12, y1: 30, x2: 35, length: 5 },
+                    { from: 3, to: 5, type: 'vertical', x1: 12, y1: 50, x2: 65, length: 15 },
+                    { from: 3, to: 4, type: 'vertical', x1: 8, y1: 50, x2: 50, length: 0 },
+                    { from: 4, to: 5, type: 'vertical', x1: 12, y1: 65, x2: 65, length: 0 },
+                    { from: 4, to: 6, type: 'vertical', x1: 8, y1: 65, x2: 80, length: 15 }
                 ],
                 metrics: {
                     cycleTime: '5 Days',

@@ -90,6 +90,7 @@
             padding: 0 15px;
             cursor: pointer;
             transition: background-color 0.3s;
+            font-size: 1rem;
         }
         
         .nav-item:hover {
@@ -131,6 +132,7 @@
             cursor: pointer;
             display: flex;
             align-items: center;
+            font-size: 0.95rem;
         }
         
         .dropdown-item:hover {
@@ -183,12 +185,6 @@
             font-size: 1.1rem;
             color: white;
             font-weight: 600;
-        }
-        
-        .bahrain-flag i {
-            margin-right: 10px;
-            color: #fff;
-            font-size: 1.4rem;
         }
         
         .dark-mode-toggle {
@@ -1022,15 +1018,19 @@
         }
         
         body.dark-mode .process-canvas,
-        body.dark-mode .analysis-panel,
         body.dark-mode .kpi-card,
         body.dark-mode .process-node {
             background-color: #2d3748;
             color: #e2e8f0;
         }
         
+        body.dark-mode .analysis-panel {
+            background-color: #2d3748;
+            border-left-color: #4a5568;
+        }
+        
         body.dark-mode .canvas-title {
-            color: #e2e8f0;
+            color: #90cdf4;
             font-weight: 700;
         }
         
@@ -1168,6 +1168,26 @@
             z-index: -1;
             border-radius: 2px 0 0 2px;
         }
+        
+        /* Fix for share button size */
+        #shareContainer .btn {
+            padding: 8px 15px;
+        }
+        
+        /* Fix for arrows */
+        .connector-arrow {
+            border-top-color: #718096;
+        }
+        
+        .connector {
+            background-color: #718096;
+        }
+        
+        /* File dropdown icon */
+        .nav-item.has-dropdown i {
+            margin-right: 8px;
+            color: var(--accent);
+        }
     </style>
 </head>
 <body>
@@ -1211,6 +1231,7 @@
                 </div>
                 <ul class="nav-menu" id="navMenu">
                     <li class="nav-item has-dropdown">
+                        <i class="fas fa-folder"></i>
                         File
                         <div class="dropdown">
                             <div class="dropdown-item">
@@ -1238,7 +1259,6 @@
                     </li>
                 </ul>
                 <div class="bahrain-flag">
-                    <i class="fas fa-flag"></i>
                     <span>Kingdom of Bahrain</span>
                 </div>
             </div>

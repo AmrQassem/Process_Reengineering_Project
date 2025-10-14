@@ -1190,9 +1190,18 @@
             color: var(--primary);
         }
         
-        /* Fix for share button size */
+        /* Fix for share button size and alignment */
+        #shareContainer {
+            position: relative;
+            display: inline-block;
+        }
+        
         #shareContainer .btn {
             padding: 8px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 36px;
         }
         
         /* Fix for arrows */
@@ -1215,22 +1224,9 @@
             transform: translateY(1px);
         }
         
-        /* Fix for share button duplicate */
-        #shareContainer {
-            position: relative;
-            display: inline-block;
-        }
-        
         /* Remove duplicate share button */
         #duplicateShareButton {
             display: none;
-        }
-        
-        /* Fix for share button dropdown arrow alignment */
-        #shareContainer .btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
         
         /* Fix for faded buttons in light mode */
@@ -1261,6 +1257,17 @@
         
         body.dark-mode .share-dropdown .divider {
             background-color: #4a5568;
+        }
+        
+        /* Share button dropdown arrow fix */
+        #shareContainer .nav-item.has-dropdown::after {
+            line-height: 1;
+            vertical-align: middle;
+        }
+        
+        /* Adjust canvas actions to better accommodate share button */
+        .canvas-actions {
+            gap: 8px;
         }
     </style>
 </head>
@@ -1554,8 +1561,11 @@
                     { id: 4, type: 'end', title: 'Reject', text: 'Invalid order', x: 35, y: 40 }
                 ],
                 connectors: [
-                    { from: 1, to: 2, type: 'horizontal', x1: 17, y1: 17.5, x2: 35, length: 18 },
+                    // Horizontal from node 1 to node 2
+                    { from: 1, to: 2, type: 'horizontal', x1: 16, y1: 17.5, x2: 35, length: 19 },
+                    // Horizontal from node 2 to node 3
                     { from: 2, to: 3, type: 'horizontal', x1: 49, y1: 17.5, x2: 65, length: 16 },
+                    // Vertical from node 2 to node 4
                     { from: 2, to: 4, type: 'vertical', x1: 42, y1: 24, x2: 40, length: 16 }
                 ],
                 metrics: {
@@ -1575,11 +1585,17 @@
                     { id: 6, type: 'end', title: 'Reject', text: 'Invalid order', x: 65, y: 40 }
                 ],
                 connectors: [
-                    { from: 1, to: 2, type: 'horizontal', x1: 17, y1: 17.5, x2: 25, length: 8 },
+                    // Horizontal from node 1 to node 2
+                    { from: 1, to: 2, type: 'horizontal', x1: 16, y1: 17.5, x2: 25, length: 9 },
+                    // Horizontal from node 2 to node 3
                     { from: 2, to: 3, type: 'horizontal', x1: 39, y1: 17.5, x2: 45, length: 6 },
+                    // Horizontal from node 3 to node 5
                     { from: 3, to: 5, type: 'horizontal', x1: 59, y1: 17.5, x2: 65, length: 6 },
+                    // Vertical from node 3 to node 4
                     { from: 3, to: 4, type: 'vertical', x1: 47, y1: 24, x2: 40, length: 16 },
+                    // Horizontal from node 4 to node 5
                     { from: 4, to: 5, type: 'horizontal', x1: 44, y1: 42.5, x2: 65, length: 21 },
+                    // Vertical from node 4 to node 6
                     { from: 4, to: 6, type: 'vertical', x1: 67, y1: 42.5, x2: 40, length: -2.5 }
                 ],
                 metrics: {
@@ -1601,8 +1617,11 @@
                     { id: 4, type: 'end', title: 'Reject', text: 'Invalid order', x: 5, y: 65 }
                 ],
                 connectors: [
+                    // Vertical from node 1 to node 2
                     { from: 1, to: 2, type: 'vertical', x1: 12, y1: 15, x2: 25, length: 10 },
+                    // Vertical from node 2 to node 3
                     { from: 2, to: 3, type: 'vertical', x1: 12, y1: 40, x2: 45, length: 5 },
+                    // Vertical from node 2 to node 4
                     { from: 2, to: 4, type: 'vertical', x1: 8, y1: 40, x2: 65, length: 25 }
                 ],
                 metrics: {
@@ -1622,11 +1641,17 @@
                     { id: 6, type: 'end', title: 'Reject', text: 'Invalid order', x: 5, y: 80 }
                 ],
                 connectors: [
+                    // Vertical from node 1 to node 2
                     { from: 1, to: 2, type: 'vertical', x1: 12, y1: 15, x2: 20, length: 5 },
+                    // Vertical from node 2 to node 3
                     { from: 2, to: 3, type: 'vertical', x1: 12, y1: 30, x2: 35, length: 5 },
+                    // Vertical from node 3 to node 5
                     { from: 3, to: 5, type: 'vertical', x1: 12, y1: 50, x2: 65, length: 15 },
+                    // Vertical from node 3 to node 4
                     { from: 3, to: 4, type: 'vertical', x1: 8, y1: 50, x2: 50, length: 0 },
+                    // Vertical from node 4 to node 5
                     { from: 4, to: 5, type: 'vertical', x1: 12, y1: 65, x2: 65, length: 0 },
+                    // Vertical from node 4 to node 6
                     { from: 4, to: 6, type: 'vertical', x1: 8, y1: 65, x2: 80, length: 15 }
                 ],
                 metrics: {

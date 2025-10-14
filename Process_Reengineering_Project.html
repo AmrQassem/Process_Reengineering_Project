@@ -90,7 +90,8 @@
             padding: 0 15px;
             cursor: pointer;
             transition: background-color 0.3s;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            font-weight: 500;
         }
         
         .nav-item:hover {
@@ -294,6 +295,7 @@
             gap: 5px;
             font-size: 0.9rem;
             transition: all 0.3s;
+            height: 36px;
         }
         
         .btn:hover {
@@ -423,7 +425,7 @@
         /* Connectors */
         .connector {
             position: absolute;
-            background-color: #cbd5e0;
+            background-color: #718096;
             z-index: 1;
         }
         
@@ -441,7 +443,7 @@
             height: 0;
             border-left: 6px solid transparent;
             border-right: 6px solid transparent;
-            border-top: 8px solid #cbd5e0;
+            border-top: 8px solid #718096;
             z-index: 2;
         }
         
@@ -457,6 +459,7 @@
         
         .panel-header {
             padding: 20px 20px 0;
+            border-bottom: 1px solid #e2e8f0;
         }
         
         .panel-title {
@@ -1029,6 +1032,10 @@
             border-left-color: #4a5568;
         }
         
+        body.dark-mode .panel-header {
+            border-bottom-color: #4a5568;
+        }
+        
         body.dark-mode .canvas-title {
             color: #90cdf4;
             font-weight: 700;
@@ -1144,29 +1151,6 @@
             width: 20px;
             text-align: center;
             color: var(--primary);
-        }
-        
-        /* Bahrain flag colors */
-        .bahrain-flag i {
-            color: #fff;
-            text-shadow: 
-                -1px -1px 0 #ce1126,
-                1px -1px 0 #ce1126,
-                -1px 1px 0 #ce1126,
-                1px 1px 0 #ce1126;
-            position: relative;
-        }
-        
-        .bahrain-flag i:after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 50%;
-            height: 100%;
-            background-color: #ce1126;
-            z-index: -1;
-            border-radius: 2px 0 0 2px;
         }
         
         /* Fix for share button size */
@@ -1339,7 +1323,7 @@
             <!-- Analysis Panel -->
             <div class="analysis-panel">
                 <div class="panel-header">
-                    <div class="panel-title">PROCESS ANALYSIS & OPTIMIZATION</div>
+                    <div class="panel-title">Process Analysis & Optimization Dashboard</div>
                     <div class="panel-tabs">
                         <div class="panel-tab active">Current Process</div>
                         <div class="panel-tab">Optimized Process</div>

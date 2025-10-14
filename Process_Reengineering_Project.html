@@ -101,7 +101,8 @@
         .nav-item.has-dropdown::after {
             content: "▾";
             margin-left: 8px;
-            font-size: 0.8rem;
+            font-size: 1.2rem; /* Increased dropdown arrow size */
+            color: var(--accent);
         }
         
         .dropdown {
@@ -301,6 +302,10 @@
         .btn:hover {
             background-color: #f8f9fa;
             border-color: var(--primary-light);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
         }
         
         .btn-primary {
@@ -1203,6 +1208,22 @@
             margin-right: 8px;
             color: var(--accent);
         }
+        
+        /* Button active state */
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        /* Fix for share button duplicate */
+        #shareContainer {
+            position: relative;
+            display: inline-block;
+        }
+        
+        /* Remove duplicate share button */
+        #duplicateShareButton {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -1495,9 +1516,9 @@
                     { id: 4, type: 'end', title: 'Reject', text: 'Invalid order', x: 35, y: 40 }
                 ],
                 connectors: [
-                    { from: 1, to: 2, type: 'horizontal', x1: 20, y1: 17.5, x2: 35, length: 15 },
-                    { from: 2, to: 3, type: 'horizontal', x1: 50, y1: 17.5, x2: 65, length: 15 },
-                    { from: 2, to: 4, type: 'vertical', x1: 42, y1: 17.5, x2: 40, length: 22.5 }
+                    { from: 1, to: 2, type: 'horizontal', x1: 21, y1: 17.5, x2: 35, length: 14 },
+                    { from: 2, to: 3, type: 'horizontal', x1: 51, y1: 17.5, x2: 65, length: 14 },
+                    { from: 2, to: 4, type: 'vertical', x1: 42, y1: 25, x2: 40, length: 15 }
                 ],
                 metrics: {
                     cycleTime: '12 Days',
@@ -1516,11 +1537,11 @@
                     { id: 6, type: 'end', title: 'Reject', text: 'Invalid order', x: 65, y: 40 }
                 ],
                 connectors: [
-                    { from: 1, to: 2, type: 'horizontal', x1: 20, y1: 17.5, x2: 25, length: 5 },
-                    { from: 2, to: 3, type: 'horizontal', x1: 30, y1: 17.5, x2: 45, length: 15 },
-                    { from: 3, to: 5, type: 'horizontal', x1: 50, y1: 17.5, x2: 65, length: 15 },
-                    { from: 3, to: 4, type: 'vertical', x1: 47, y1: 17.5, x2: 40, length: 22.5 },
-                    { from: 4, to: 5, type: 'horizontal', x1: 35, y1: 42.5, x2: 65, length: 30 },
+                    { from: 1, to: 2, type: 'horizontal', x1: 21, y1: 17.5, x2: 25, length: 4 },
+                    { from: 2, to: 3, type: 'horizontal', x1: 41, y1: 17.5, x2: 45, length: 4 },
+                    { from: 3, to: 5, type: 'horizontal', x1: 61, y1: 17.5, x2: 65, length: 4 },
+                    { from: 3, to: 4, type: 'vertical', x1: 47, y1: 25, x2: 40, length: 15 },
+                    { from: 4, to: 5, type: 'horizontal', x1: 46, y1: 42.5, x2: 65, length: 19 },
                     { from: 4, to: 6, type: 'vertical', x1: 67, y1: 42.5, x2: 40, length: -2.5 }
                 ],
                 metrics: {
@@ -1542,9 +1563,9 @@
                     { id: 4, type: 'end', title: 'Reject', text: 'Invalid order', x: 5, y: 65 }
                 ],
                 connectors: [
-                    { from: 1, to: 2, type: 'vertical', x1: 8, y1: 10, x2: 5, length: 15 },
-                    { from: 2, to: 3, type: 'vertical', x1: 8, y1: 30, x2: 5, length: 15 },
-                    { from: 2, to: 4, type: 'vertical', x1: 8, y1: 30, x2: 65, length: 35 }
+                    { from: 1, to: 2, type: 'vertical', x1: 12, y1: 18, x2: 25, length: 7 },
+                    { from: 2, to: 3, type: 'vertical', x1: 12, y1: 38, x2: 45, length: 7 },
+                    { from: 2, to: 4, type: 'vertical', x1: 8, y1: 38, x2: 65, length: 27 }
                 ],
                 metrics: {
                     cycleTime: '12 Days',
@@ -1563,12 +1584,12 @@
                     { id: 6, type: 'end', title: 'Reject', text: 'Invalid order', x: 5, y: 80 }
                 ],
                 connectors: [
-                    { from: 1, to: 2, type: 'vertical', x1: 8, y1: 10, x2: 5, length: 10 },
-                    { from: 2, to: 3, type: 'vertical', x1: 8, y1: 25, x2: 5, length: 10 },
-                    { from: 3, to: 5, type: 'vertical', x1: 8, y1: 40, x2: 5, length: 20 },
-                    { from: 3, to: 4, type: 'vertical', x1: 8, y1: 40, x2: 5, length: 10 },
-                    { from: 4, to: 5, type: 'vertical', x1: 8, y1: 55, x2: 5, length: 5 },
-                    { from: 4, to: 6, type: 'vertical', x1: 8, y1: 55, x2: 5, length: 20 }
+                    { from: 1, to: 2, type: 'vertical', x1: 12, y1: 18, x2: 20, length: 2 },
+                    { from: 2, to: 3, type: 'vertical', x1: 12, y1: 33, x2: 35, length: 2 },
+                    { from: 3, to: 5, type: 'vertical', x1: 12, y1: 48, x2: 65, length: 17 },
+                    { from: 3, to: 4, type: 'vertical', x1: 8, y1: 48, x2: 50, length: 2 },
+                    { from: 4, to: 5, type: 'vertical', x1: 12, y1: 63, x2: 65, length: 2 },
+                    { from: 4, to: 6, type: 'vertical', x1: 8, y1: 63, x2: 80, length: 17 }
                 ],
                 metrics: {
                     cycleTime: '5 Days',

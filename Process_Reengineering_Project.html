@@ -361,6 +361,7 @@
             text-align: center;
             cursor: move;
             border-left: 4px solid transparent;
+            border: 1px solid #e2e8f0; /* Added border to make nodes visible */
             transition: all 0.3s;
             z-index: 10;
         }
@@ -383,6 +384,7 @@
             justify-content: center;
             border-radius: 50%;
             padding: 15px;
+            border: 1px solid #e2e8f0; /* Added border to decision nodes */
         }
         
         .process-node.decision .node-text {
@@ -1035,6 +1037,7 @@
         body.dark-mode .process-node {
             background-color: #2d3748;
             color: #e2e8f0;
+            border-color: #4a5568; /* Dark mode border color */
         }
         
         body.dark-mode .analysis-panel {
@@ -1197,11 +1200,22 @@
         }
         
         #shareContainer .btn {
-            padding: 8px 15px;
+            padding: 8px 30px 8px 15px; /* More right padding for arrow */
             display: flex;
             align-items: center;
             justify-content: center;
             height: 36px;
+            position: relative;
+        }
+        
+        /* Add dropdown arrow to share button */
+        #shareContainer .btn::after {
+            content: "▾";
+            position: absolute;
+            right: 10px;
+            font-size: 1.2rem;
+            color: var(--accent);
+            line-height: 1;
         }
         
         /* Fix for arrows */
@@ -1257,16 +1271,6 @@
         
         body.dark-mode .share-dropdown .divider {
             background-color: #4a5568;
-        }
-        
-        /* Share button dropdown arrow fix */
-        #shareContainer::after {
-            content: "▾";
-            margin-left: 8px;
-            font-size: 1.2rem;
-            color: var(--accent);
-            display: inline-block;
-            line-height: 1;
         }
         
         /* Adjust canvas actions to better accommodate share button */

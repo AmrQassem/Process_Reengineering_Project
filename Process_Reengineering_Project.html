@@ -1260,9 +1260,13 @@
         }
         
         /* Share button dropdown arrow fix */
-        #shareContainer .nav-item.has-dropdown::after {
+        #shareContainer::after {
+            content: "▾";
+            margin-left: 8px;
+            font-size: 1.2rem;
+            color: var(--accent);
+            display: inline-block;
             line-height: 1;
-            vertical-align: middle;
         }
         
         /* Adjust canvas actions to better accommodate share button */
@@ -1868,15 +1872,20 @@
                 mobileProcessStates[currentProcessState] : 
                 processStates[currentProcessState];
             
+            // Always use initial metrics for Current Process tab
+            const initialProcessData = isMobileView ? 
+                mobileProcessStates.initial : 
+                processStates.initial;
+                
             if (tabName === 'Current Process') {
                 panelContent.innerHTML = `
                     <div class="kpi-cards">
                         <div class="kpi-card">
-                            <div class="kpi-value">${processData.metrics.cycleTime}</div>
+                            <div class="kpi-value">${initialProcessData.metrics.cycleTime}</div>
                             <div class="kpi-label">Cycle Time</div>
                         </div>
                         <div class="kpi-card">
-                            <div class="kpi-value">${processData.metrics.cost}</div>
+                            <div class="kpi-value">${initialProcessData.metrics.cost}</div>
                             <div class="kpi-label">Avg. Cost</div>
                         </div>
                     </div>
@@ -1892,7 +1901,7 @@
                                     <div class="info-tooltip">Total cost to complete one instance of this process</div>
                                 </div>
                             </span>
-                            <span class="metric-value">${processData.metrics.cost}</span>
+                            <span class="metric-value">${initialProcessData.metrics.cost}</span>
                         </li>
                         <li class="metric-item">
                             <span class="metric-label">
@@ -1902,7 +1911,7 @@
                                     <div class="info-tooltip">Average time from start to completion of the process</div>
                                 </div>
                             </span>
-                            <span class="metric-value">${processData.metrics.cycleTime}</span>
+                            <span class="metric-value">${initialProcessData.metrics.cycleTime}</span>
                         </li>
                         <li class="metric-item">
                             <span class="metric-label">
@@ -1912,7 +1921,7 @@
                                     <div class="info-tooltip">Number of process instances completed per day</div>
                                 </div>
                             </span>
-                            <span class="metric-value">${processData.metrics.throughput}</span>
+                            <span class="metric-value">${initialProcessData.metrics.throughput}</span>
                         </li>
                         <li class="metric-item">
                             <span class="metric-label">
@@ -1922,7 +1931,7 @@
                                     <div class="info-tooltip">Percentage of process instances with errors or rework</div>
                                 </div>
                             </span>
-                            <span class="metric-value">${processData.metrics.errorRate}</span>
+                            <span class="metric-value">${initialProcessData.metrics.errorRate}</span>
                         </li>
                     </ul>
                     

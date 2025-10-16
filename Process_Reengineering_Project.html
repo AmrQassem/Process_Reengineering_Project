@@ -1723,19 +1723,22 @@
                         const endX = toCenterX - (toRect.width / canvasRect.width * 50);
                         const yPos = fromCenterY;
                         
-                        const connectorEl = document.createElement('div');
-                        connectorEl.className = 'connector horizontal';
-                        connectorEl.style.top = `${yPos}%`;
-                        connectorEl.style.left = `${startX}%`;
-                        connectorEl.style.width = `${endX - startX}%`;
-                        processCanvas.appendChild(connectorEl);
-                        
-                        // Add arrow at the end
-                        const arrowEl = document.createElement('div');
-                        arrowEl.className = 'connector-arrow';
-                        arrowEl.style.top = `${yPos - 0.4}%`;
-                        arrowEl.style.left = `${endX}%`;
-                        processCanvas.appendChild(arrowEl);
+                        // Only draw if the line has positive length
+                        if (endX > startX) {
+                            const connectorEl = document.createElement('div');
+                            connectorEl.className = 'connector horizontal';
+                            connectorEl.style.top = `${yPos}%`;
+                            connectorEl.style.left = `${startX}%`;
+                            connectorEl.style.width = `${endX - startX}%`;
+                            processCanvas.appendChild(connectorEl);
+                            
+                            // Add arrow at the end
+                            const arrowEl = document.createElement('div');
+                            arrowEl.className = 'connector-arrow';
+                            arrowEl.style.top = `${yPos - 0.4}%`;
+                            arrowEl.style.left = `${endX}%`;
+                            processCanvas.appendChild(arrowEl);
+                        }
                         
                     } else if (connector.type === 'vertical') {
                         // Draw vertical line from bottom of fromNode to top of toNode
@@ -1743,20 +1746,23 @@
                         const startY = fromCenterY + (fromRect.height / canvasRect.height * 50);
                         const endY = toCenterY - (toRect.height / canvasRect.height * 50);
                         
-                        const connectorEl = document.createElement('div');
-                        connectorEl.className = 'connector vertical';
-                        connectorEl.style.top = `${startY}%`;
-                        connectorEl.style.left = `${xPos}%`;
-                        connectorEl.style.height = `${endY - startY}%`;
-                        processCanvas.appendChild(connectorEl);
-                        
-                        // Add arrow at the end
-                        const arrowEl = document.createElement('div');
-                        arrowEl.className = 'connector-arrow';
-                        arrowEl.style.top = `${endY}%`;
-                        arrowEl.style.left = `${xPos - 0.4}%`;
-                        arrowEl.style.transform = 'rotate(90deg)';
-                        processCanvas.appendChild(arrowEl);
+                        // Only draw if the line has positive length
+                        if (endY > startY) {
+                            const connectorEl = document.createElement('div');
+                            connectorEl.className = 'connector vertical';
+                            connectorEl.style.top = `${startY}%`;
+                            connectorEl.style.left = `${xPos}%`;
+                            connectorEl.style.height = `${endY - startY}%`;
+                            processCanvas.appendChild(connectorEl);
+                            
+                            // Add arrow at the end
+                            const arrowEl = document.createElement('div');
+                            arrowEl.className = 'connector-arrow';
+                            arrowEl.style.top = `${endY}%`;
+                            arrowEl.style.left = `${xPos - 0.4}%`;
+                            arrowEl.style.transform = 'rotate(90deg)';
+                            processCanvas.appendChild(arrowEl);
+                        }
                     }
                 });
                 

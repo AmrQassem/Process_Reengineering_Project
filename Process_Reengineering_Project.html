@@ -350,7 +350,7 @@
             min-height: 500px;
         }
         
-        /* Process Nodes */
+        /* Process Nodes - Updated with more visible borders */
         .process-node {
             position: absolute;
             width: 160px;
@@ -361,7 +361,7 @@
             text-align: center;
             cursor: move;
             border-left: 4px solid transparent;
-            border: 1px solid #e2e8f0; /* Added border to make nodes visible */
+            border: 2px solid #cbd5e0; /* More visible border */
             transition: all 0.3s;
             z-index: 10;
         }
@@ -384,7 +384,7 @@
             justify-content: center;
             border-radius: 50%;
             padding: 15px;
-            border: 1px solid #e2e8f0; /* Added border to decision nodes */
+            border: 2px solid #cbd5e0; /* More visible border for decision nodes */
         }
         
         .process-node.decision .node-text {
@@ -1037,7 +1037,7 @@
         body.dark-mode .process-node {
             background-color: #2d3748;
             color: #e2e8f0;
-            border-color: #4a5568; /* Dark mode border color */
+            border-color: #718096; /* Dark mode border color */
         }
         
         body.dark-mode .analysis-panel {
@@ -1569,12 +1569,12 @@
                     { id: 4, type: 'end', title: 'Reject', text: 'Invalid order', x: 35, y: 40 }
                 ],
                 connectors: [
-                    // Horizontal from node 1 to node 2
-                    { from: 1, to: 2, type: 'horizontal', x1: 16, y1: 17.5, x2: 35, length: 19 },
-                    // Horizontal from node 2 to node 3
-                    { from: 2, to: 3, type: 'horizontal', x1: 49, y1: 17.5, x2: 65, length: 16 },
-                    // Vertical from node 2 to node 4
-                    { from: 2, to: 4, type: 'vertical', x1: 42, y1: 24, x2: 40, length: 16 }
+                    // Horizontal from node 1 to node 2 - ADJUST THESE VALUES
+                    { from: 1, to: 2, type: 'horizontal', x1: 18, y1: 17.5, x2: 35, length: 17 },
+                    // Horizontal from node 2 to node 3 - ADJUST THESE VALUES
+                    { from: 2, to: 3, type: 'horizontal', x1: 51, y1: 17.5, x2: 65, length: 14 },
+                    // Vertical from node 2 to node 4 - ADJUST THESE VALUES
+                    { from: 2, to: 4, type: 'vertical', x1: 42, y1: 26, x2: 40, length: 14 }
                 ],
                 metrics: {
                     cycleTime: '12 Days',
@@ -1593,17 +1593,17 @@
                     { id: 6, type: 'end', title: 'Reject', text: 'Invalid order', x: 65, y: 40 }
                 ],
                 connectors: [
-                    // Horizontal from node 1 to node 2
-                    { from: 1, to: 2, type: 'horizontal', x1: 16, y1: 17.5, x2: 25, length: 9 },
-                    // Horizontal from node 2 to node 3
-                    { from: 2, to: 3, type: 'horizontal', x1: 39, y1: 17.5, x2: 45, length: 6 },
-                    // Horizontal from node 3 to node 5
-                    { from: 3, to: 5, type: 'horizontal', x1: 59, y1: 17.5, x2: 65, length: 6 },
-                    // Vertical from node 3 to node 4
-                    { from: 3, to: 4, type: 'vertical', x1: 47, y1: 24, x2: 40, length: 16 },
-                    // Horizontal from node 4 to node 5
-                    { from: 4, to: 5, type: 'horizontal', x1: 44, y1: 42.5, x2: 65, length: 21 },
-                    // Vertical from node 4 to node 6
+                    // Horizontal from node 1 to node 2 - ADJUST THESE VALUES
+                    { from: 1, to: 2, type: 'horizontal', x1: 18, y1: 17.5, x2: 25, length: 7 },
+                    // Horizontal from node 2 to node 3 - ADJUST THESE VALUES
+                    { from: 2, to: 3, type: 'horizontal', x1: 41, y1: 17.5, x2: 45, length: 4 },
+                    // Horizontal from node 3 to node 5 - ADJUST THESE VALUES
+                    { from: 3, to: 5, type: 'horizontal', x1: 61, y1: 17.5, x2: 65, length: 4 },
+                    // Vertical from node 3 to node 4 - ADJUST THESE VALUES
+                    { from: 3, to: 4, type: 'vertical', x1: 47, y1: 26, x2: 40, length: 14 },
+                    // Horizontal from node 4 to node 5 - ADJUST THESE VALUES
+                    { from: 4, to: 5, type: 'horizontal', x1: 46, y1: 42.5, x2: 65, length: 19 },
+                    // Vertical from node 4 to node 6 - ADJUST THESE VALUES
                     { from: 4, to: 6, type: 'vertical', x1: 67, y1: 42.5, x2: 40, length: -2.5 }
                 ],
                 metrics: {
@@ -1625,12 +1625,12 @@
                     { id: 4, type: 'end', title: 'Reject', text: 'Invalid order', x: 5, y: 65 }
                 ],
                 connectors: [
-                    // Vertical from node 1 to node 2
-                    { from: 1, to: 2, type: 'vertical', x1: 12, y1: 15, x2: 25, length: 10 },
-                    // Vertical from node 2 to node 3
-                    { from: 2, to: 3, type: 'vertical', x1: 12, y1: 40, x2: 45, length: 5 },
-                    // Vertical from node 2 to node 4
-                    { from: 2, to: 4, type: 'vertical', x1: 8, y1: 40, x2: 65, length: 25 }
+                    // Vertical from node 1 to node 2 - ADJUST THESE VALUES
+                    { from: 1, to: 2, type: 'vertical', x1: 12, y1: 17, x2: 25, length: 8 },
+                    // Vertical from node 2 to node 3 - ADJUST THESE VALUES
+                    { from: 2, to: 3, type: 'vertical', x1: 12, y1: 42, x2: 45, length: 3 },
+                    // Vertical from node 2 to node 4 - ADJUST THESE VALUES
+                    { from: 2, to: 4, type: 'vertical', x1: 8, y1: 42, x2: 65, length: 23 }
                 ],
                 metrics: {
                     cycleTime: '12 Days',
@@ -1649,18 +1649,18 @@
                     { id: 6, type: 'end', title: 'Reject', text: 'Invalid order', x: 5, y: 80 }
                 ],
                 connectors: [
-                    // Vertical from node 1 to node 2
-                    { from: 1, to: 2, type: 'vertical', x1: 12, y1: 15, x2: 20, length: 5 },
-                    // Vertical from node 2 to node 3
-                    { from: 2, to: 3, type: 'vertical', x1: 12, y1: 30, x2: 35, length: 5 },
-                    // Vertical from node 3 to node 5
-                    { from: 3, to: 5, type: 'vertical', x1: 12, y1: 50, x2: 65, length: 15 },
-                    // Vertical from node 3 to node 4
-                    { from: 3, to: 4, type: 'vertical', x1: 8, y1: 50, x2: 50, length: 0 },
-                    // Vertical from node 4 to node 5
-                    { from: 4, to: 5, type: 'vertical', x1: 12, y1: 65, x2: 65, length: 0 },
-                    // Vertical from node 4 to node 6
-                    { from: 4, to: 6, type: 'vertical', x1: 8, y1: 65, x2: 80, length: 15 }
+                    // Vertical from node 1 to node 2 - ADJUST THESE VALUES
+                    { from: 1, to: 2, type: 'vertical', x1: 12, y1: 17, x2: 20, length: 3 },
+                    // Vertical from node 2 to node 3 - ADJUST THESE VALUES
+                    { from: 2, to: 3, type: 'vertical', x1: 12, y1: 32, x2: 35, length: 3 },
+                    // Vertical from node 3 to node 5 - ADJUST THESE VALUES
+                    { from: 3, to: 5, type: 'vertical', x1: 12, y1: 52, x2: 65, length: 13 },
+                    // Vertical from node 3 to node 4 - ADJUST THESE VALUES
+                    { from: 3, to: 4, type: 'vertical', x1: 8, y1: 52, x2: 50, length: -2 },
+                    // Vertical from node 4 to node 5 - ADJUST THESE VALUES
+                    { from: 4, to: 5, type: 'vertical', x1: 12, y1: 67, x2: 65, length: -2 },
+                    // Vertical from node 4 to node 6 - ADJUST THESE VALUES
+                    { from: 4, to: 6, type: 'vertical', x1: 8, y1: 67, x2: 80, length: 13 }
                 ],
                 metrics: {
                     cycleTime: '5 Days',
@@ -1713,7 +1713,7 @@
                 processCanvas.appendChild(nodeEl);
             });
             
-            // Render connectors
+            // Render connectors - THIS IS WHERE CONNECTOR LINES ARE CREATED
             processData.connectors.forEach(connector => {
                 if (connector.type === 'horizontal') {
                     const connectorEl = document.createElement('div');
@@ -1723,6 +1723,7 @@
                     connectorEl.style.width = `${connector.length}%`;
                     processCanvas.appendChild(connectorEl);
                     
+                    // THIS IS WHERE ARROWS ARE CREATED FOR HORIZONTAL LINES
                     const arrowEl = document.createElement('div');
                     arrowEl.className = 'connector-arrow';
                     arrowEl.style.top = `${connector.y1 - 0.5}%`;
@@ -1736,6 +1737,7 @@
                     connectorEl.style.height = `${connector.length}%`;
                     processCanvas.appendChild(connectorEl);
                     
+                    // THIS IS WHERE ARROWS ARE CREATED FOR VERTICAL LINES
                     const arrowEl = document.createElement('div');
                     arrowEl.className = 'connector-arrow';
                     arrowEl.style.top = `${connector.y2}%`;

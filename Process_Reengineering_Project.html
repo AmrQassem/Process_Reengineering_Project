@@ -101,7 +101,7 @@
         .nav-item.has-dropdown::after {
             content: "▾";
             margin-left: 8px;
-            font-size: 1.2rem; /* Increased dropdown arrow size */
+            font-size: 1.2rem;
             color: var(--accent);
         }
         
@@ -297,7 +297,7 @@
             font-size: 0.9rem;
             transition: all 0.3s;
             height: 36px;
-            color: var(--dark); /* Added to fix faded text */
+            color: var(--dark);
         }
         
         .btn:hover {
@@ -350,7 +350,7 @@
             min-height: 500px;
         }
         
-        /* Process Nodes - Updated with more visible borders */
+        /* Process Nodes */
         .process-node {
             position: absolute;
             width: 160px;
@@ -361,7 +361,7 @@
             text-align: center;
             cursor: move;
             border-left: 4px solid transparent;
-            border: 2px solid #cbd5e0; /* More visible border */
+            border: 2px solid #cbd5e0;
             transition: all 0.3s;
             z-index: 10;
         }
@@ -384,7 +384,7 @@
             justify-content: center;
             border-radius: 50%;
             padding: 15px;
-            border: 2px solid #cbd5e0; /* More visible border for decision nodes */
+            border: 2px solid #cbd5e0;
         }
         
         .process-node.decision .node-text {
@@ -1037,7 +1037,7 @@
         body.dark-mode .process-node {
             background-color: #2d3748;
             color: #e2e8f0;
-            border-color: #718096; /* Dark mode border color */
+            border-color: #718096;
         }
         
         body.dark-mode .analysis-panel {
@@ -1200,7 +1200,7 @@
         }
         
         #shareContainer .btn {
-            padding: 8px 30px 8px 15px; /* More right padding for arrow */
+            padding: 8px 30px 8px 15px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1569,12 +1569,9 @@
                     { id: 4, type: 'end', title: 'Reject', text: 'Invalid order', x: 35, y: 40 }
                 ],
                 connectors: [
-                    // Horizontal from node 1 to node 2 - ADJUST THESE VALUES
-                    { from: 1, to: 2, type: 'horizontal', x1: 18, y1: 17.5, x2: 35, length: 17 },
-                    // Horizontal from node 2 to node 3 - ADJUST THESE VALUES
-                    { from: 2, to: 3, type: 'horizontal', x1: 51, y1: 17.5, x2: 65, length: 14 },
-                    // Vertical from node 2 to node 4 - ADJUST THESE VALUES
-                    { from: 2, to: 4, type: 'vertical', x1: 42, y1: 26, x2: 40, length: 14 }
+                    { from: 1, to: 2, type: 'horizontal' },
+                    { from: 2, to: 3, type: 'horizontal' },
+                    { from: 2, to: 4, type: 'vertical' }
                 ],
                 metrics: {
                     cycleTime: '12 Days',
@@ -1593,18 +1590,11 @@
                     { id: 6, type: 'end', title: 'Reject', text: 'Invalid order', x: 65, y: 40 }
                 ],
                 connectors: [
-                    // Horizontal from node 1 to node 2 - ADJUST THESE VALUES
-                    { from: 1, to: 2, type: 'horizontal', x1: 18, y1: 17.5, x2: 25, length: 7 },
-                    // Horizontal from node 2 to node 3 - ADJUST THESE VALUES
-                    { from: 2, to: 3, type: 'horizontal', x1: 41, y1: 17.5, x2: 45, length: 4 },
-                    // Horizontal from node 3 to node 5 - ADJUST THESE VALUES
-                    { from: 3, to: 5, type: 'horizontal', x1: 61, y1: 17.5, x2: 65, length: 4 },
-                    // Vertical from node 3 to node 4 - ADJUST THESE VALUES
-                    { from: 3, to: 4, type: 'vertical', x1: 47, y1: 26, x2: 40, length: 14 },
-                    // Horizontal from node 4 to node 5 - ADJUST THESE VALUES
-                    { from: 4, to: 5, type: 'horizontal', x1: 46, y1: 42.5, x2: 65, length: 19 },
-                    // Vertical from node 4 to node 6 - ADJUST THESE VALUES
-                    { from: 4, to: 6, type: 'vertical', x1: 67, y1: 42.5, x2: 40, length: -2.5 }
+                    { from: 1, to: 2, type: 'horizontal' },
+                    { from: 2, to: 3, type: 'horizontal' },
+                    { from: 3, to: 5, type: 'horizontal' },
+                    { from: 3, to: 4, type: 'vertical' },
+                    { from: 4, to: 5, type: 'horizontal' }
                 ],
                 metrics: {
                     cycleTime: '5 Days',
@@ -1625,12 +1615,9 @@
                     { id: 4, type: 'end', title: 'Reject', text: 'Invalid order', x: 5, y: 65 }
                 ],
                 connectors: [
-                    // Vertical from node 1 to node 2 - ADJUST THESE VALUES
-                    { from: 1, to: 2, type: 'vertical', x1: 12, y1: 17, x2: 25, length: 8 },
-                    // Vertical from node 2 to node 3 - ADJUST THESE VALUES
-                    { from: 2, to: 3, type: 'vertical', x1: 12, y1: 42, x2: 45, length: 3 },
-                    // Vertical from node 2 to node 4 - ADJUST THESE VALUES
-                    { from: 2, to: 4, type: 'vertical', x1: 8, y1: 42, x2: 65, length: 23 }
+                    { from: 1, to: 2, type: 'vertical' },
+                    { from: 2, to: 3, type: 'vertical' },
+                    { from: 2, to: 4, type: 'vertical' }
                 ],
                 metrics: {
                     cycleTime: '12 Days',
@@ -1649,18 +1636,11 @@
                     { id: 6, type: 'end', title: 'Reject', text: 'Invalid order', x: 5, y: 80 }
                 ],
                 connectors: [
-                    // Vertical from node 1 to node 2 - ADJUST THESE VALUES
-                    { from: 1, to: 2, type: 'vertical', x1: 12, y1: 17, x2: 20, length: 3 },
-                    // Vertical from node 2 to node 3 - ADJUST THESE VALUES
-                    { from: 2, to: 3, type: 'vertical', x1: 12, y1: 32, x2: 35, length: 3 },
-                    // Vertical from node 3 to node 5 - ADJUST THESE VALUES
-                    { from: 3, to: 5, type: 'vertical', x1: 12, y1: 52, x2: 65, length: 13 },
-                    // Vertical from node 3 to node 4 - ADJUST THESE VALUES
-                    { from: 3, to: 4, type: 'vertical', x1: 8, y1: 52, x2: 50, length: -2 },
-                    // Vertical from node 4 to node 5 - ADJUST THESE VALUES
-                    { from: 4, to: 5, type: 'vertical', x1: 12, y1: 67, x2: 65, length: -2 },
-                    // Vertical from node 4 to node 6 - ADJUST THESE VALUES
-                    { from: 4, to: 6, type: 'vertical', x1: 8, y1: 67, x2: 80, length: 13 }
+                    { from: 1, to: 2, type: 'vertical' },
+                    { from: 2, to: 3, type: 'vertical' },
+                    { from: 3, to: 5, type: 'vertical' },
+                    { from: 3, to: 4, type: 'vertical' },
+                    { from: 4, to: 5, type: 'vertical' }
                 ],
                 metrics: {
                     cycleTime: '5 Days',
@@ -1694,63 +1674,97 @@
             
             const processData = isMobileView ? mobileProcessStates[state] : processStates[state];
             
-            // Render nodes
+            // Render nodes first and store their positions
+            const nodePositions = {};
             processData.nodes.forEach(node => {
                 const nodeEl = document.createElement('div');
                 nodeEl.className = `process-node ${node.type}`;
-                if (isMobileView) {
-                    nodeEl.style.top = `${node.y}%`;
-                    nodeEl.style.left = `${node.x}%`;
-                } else {
-                    nodeEl.style.top = `${node.y}%`;
-                    nodeEl.style.left = `${node.x}%`;
-                }
+                nodeEl.style.top = `${node.y}%`;
+                nodeEl.style.left = `${node.x}%`;
                 nodeEl.innerHTML = `
                     <div class="node-title">${node.title}</div>
                     <div class="node-text">${node.text}</div>
                     <div class="node-badge">${node.id}</div>
                 `;
                 processCanvas.appendChild(nodeEl);
+                
+                // Store node position and element for connector calculations
+                nodePositions[node.id] = {
+                    element: nodeEl,
+                    x: node.x,
+                    y: node.y,
+                    type: node.type
+                };
             });
             
-            // Render connectors - THIS IS WHERE CONNECTOR LINES ARE CREATED
-            processData.connectors.forEach(connector => {
-                if (connector.type === 'horizontal') {
-                    const connectorEl = document.createElement('div');
-                    connectorEl.className = 'connector horizontal';
-                    connectorEl.style.top = `${connector.y1}%`;
-                    connectorEl.style.left = `${connector.x1}%`;
-                    connectorEl.style.width = `${connector.length}%`;
-                    processCanvas.appendChild(connectorEl);
+            // Wait for DOM to render nodes, then calculate and render connectors
+            setTimeout(() => {
+                // Render connectors based on actual node positions
+                processData.connectors.forEach(connector => {
+                    const fromNode = nodePositions[connector.from];
+                    const toNode = nodePositions[connector.to];
                     
-                    // THIS IS WHERE ARROWS ARE CREATED FOR HORIZONTAL LINES
-                    const arrowEl = document.createElement('div');
-                    arrowEl.className = 'connector-arrow';
-                    arrowEl.style.top = `${connector.y1 - 0.5}%`;
-                    arrowEl.style.left = `${connector.x2}%`;
-                    processCanvas.appendChild(arrowEl);
-                } else if (connector.type === 'vertical') {
-                    const connectorEl = document.createElement('div');
-                    connectorEl.className = 'connector vertical';
-                    connectorEl.style.top = `${connector.y1}%`;
-                    connectorEl.style.left = `${connector.x1}%`;
-                    connectorEl.style.height = `${connector.length}%`;
-                    processCanvas.appendChild(connectorEl);
+                    if (!fromNode || !toNode) return;
                     
-                    // THIS IS WHERE ARROWS ARE CREATED FOR VERTICAL LINES
-                    const arrowEl = document.createElement('div');
-                    arrowEl.className = 'connector-arrow';
-                    arrowEl.style.top = `${connector.y2}%`;
-                    arrowEl.style.left = `${connector.x1 - 0.5}%`;
-                    arrowEl.style.transform = 'rotate(90deg)';
-                    processCanvas.appendChild(arrowEl);
+                    // Get actual positions of nodes
+                    const fromRect = fromNode.element.getBoundingClientRect();
+                    const toRect = toNode.element.getBoundingClientRect();
+                    const canvasRect = processCanvas.getBoundingClientRect();
+                    
+                    // Convert to percentages relative to canvas
+                    const fromCenterX = ((fromRect.left + fromRect.width / 2 - canvasRect.left) / canvasRect.width) * 100;
+                    const fromCenterY = ((fromRect.top + fromRect.height / 2 - canvasRect.top) / canvasRect.height) * 100;
+                    const toCenterX = ((toRect.left + toRect.width / 2 - canvasRect.left) / canvasRect.width) * 100;
+                    const toCenterY = ((toRect.top + toRect.height / 2 - canvasRect.top) / canvasRect.height) * 100;
+                    
+                    if (connector.type === 'horizontal') {
+                        // Draw horizontal line from right of fromNode to left of toNode
+                        const startX = fromCenterX + (fromRect.width / canvasRect.width * 50);
+                        const endX = toCenterX - (toRect.width / canvasRect.width * 50);
+                        const yPos = fromCenterY;
+                        
+                        const connectorEl = document.createElement('div');
+                        connectorEl.className = 'connector horizontal';
+                        connectorEl.style.top = `${yPos}%`;
+                        connectorEl.style.left = `${startX}%`;
+                        connectorEl.style.width = `${endX - startX}%`;
+                        processCanvas.appendChild(connectorEl);
+                        
+                        // Add arrow at the end
+                        const arrowEl = document.createElement('div');
+                        arrowEl.className = 'connector-arrow';
+                        arrowEl.style.top = `${yPos - 0.4}%`;
+                        arrowEl.style.left = `${endX}%`;
+                        processCanvas.appendChild(arrowEl);
+                        
+                    } else if (connector.type === 'vertical') {
+                        // Draw vertical line from bottom of fromNode to top of toNode
+                        const xPos = fromCenterX;
+                        const startY = fromCenterY + (fromRect.height / canvasRect.height * 50);
+                        const endY = toCenterY - (toRect.height / canvasRect.height * 50);
+                        
+                        const connectorEl = document.createElement('div');
+                        connectorEl.className = 'connector vertical';
+                        connectorEl.style.top = `${startY}%`;
+                        connectorEl.style.left = `${xPos}%`;
+                        connectorEl.style.height = `${endY - startY}%`;
+                        processCanvas.appendChild(connectorEl);
+                        
+                        // Add arrow at the end
+                        const arrowEl = document.createElement('div');
+                        arrowEl.className = 'connector-arrow';
+                        arrowEl.style.top = `${endY}%`;
+                        arrowEl.style.left = `${xPos - 0.4}%`;
+                        arrowEl.style.transform = 'rotate(90deg)';
+                        processCanvas.appendChild(arrowEl);
+                    }
+                });
+                
+                // Reattach drag events to new nodes (only for desktop)
+                if (!isMobileView) {
+                    attachDragEvents();
                 }
-            });
-            
-            // Reattach drag events to new nodes (only for desktop)
-            if (!isMobileView) {
-                attachDragEvents();
-            }
+            }, 10);
         }
 
         // Mobile menu functionality
@@ -1804,7 +1818,7 @@
                 
                 function dragStart(e) {
                     initialX = e.clientX - xOffset;
-                    initialY = e.clientY - initialY;
+                    initialY = e.clientY - yOffset;
                     
                     if (e.target === node || node.contains(e.target)) {
                         isDragging = true;
@@ -1832,8 +1846,8 @@
                     const canvasRect = document.getElementById('processCanvas').getBoundingClientRect();
                     
                     // Calculate new position
-                    const currentLeft = parseInt(el.style.left || 0);
-                    const currentTop = parseInt(el.style.top || 0);
+                    const currentLeft = parseFloat(el.style.left || 0);
+                    const currentTop = parseFloat(el.style.top || 0);
                     
                     const newX = currentLeft + (xPos / canvasRect.width * 100);
                     const newY = currentTop + (yPos / canvasRect.height * 100);
@@ -1852,6 +1866,9 @@
                     isDragging = false;
                     node.style.zIndex = "10";
                     node.classList.remove('pulse');
+                    
+                    // Re-render connectors after node is moved
+                    renderProcess(currentProcessState);
                 }
             });
         }

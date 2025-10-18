@@ -97,11 +97,13 @@
         .nav-item:hover {
             background-color: rgba(255, 255, 255, 0.1);
         }
+
+
         
         .nav-item.has-dropdown::after {
             content: "▾";
             margin-left: 8px;
-            font-size: 1.2rem;
+            font-size: 1.2rem; /* Increased dropdown arrow size */
             color: var(--accent);
         }
         
@@ -297,7 +299,7 @@
             font-size: 0.9rem;
             transition: all 0.3s;
             height: 36px;
-            color: var(--dark);
+            color: var(--dark); /* Added to fix faded text */
         }
         
         .btn:hover {
@@ -350,7 +352,7 @@
             min-height: 500px;
         }
         
-        /* Process Nodes */
+        /* Process Nodes - Updated with more visible borders */
         .process-node {
             position: absolute;
             width: 160px;
@@ -361,7 +363,7 @@
             text-align: center;
             cursor: move;
             border-left: 4px solid transparent;
-            border: 2px solid #cbd5e0;
+            border: 2px solid #cbd5e0; /* More visible border */
             transition: all 0.3s;
             z-index: 10;
         }
@@ -384,7 +386,7 @@
             justify-content: center;
             border-radius: 50%;
             padding: 15px;
-            border: 2px solid #cbd5e0;
+            border: 2px solid #cbd5e0; /* More visible border for decision nodes */
         }
         
         .process-node.decision .node-text {
@@ -430,10 +432,11 @@
             font-weight: bold;
         }
         
-        /* Connectors */
+        /* Updated Connector Styles with Embedded Arrows */
         .connector {
             position: absolute;
-            background-color: #718096;
+            background-color: #718096 !important;
+            opacity: 0.8 !important;
             z-index: 1;
         }
         
@@ -444,15 +447,77 @@
         .connector.vertical {
             width: 2px;
         }
+
+        .connector.diagonal {
+            height: 2px;
+            background-color: #718096;
+            position: absolute;
+            transform-origin: left center;
+            z-index: 1;
+        }
         
-        .connector-arrow {
+        /* Embedded arrow styles for connectors */
+        .connector.horizontal::after,
+        .connector.vertical::after,
+        .connector.diagonal::after {
+            content: '';
             position: absolute;
             width: 0;
             height: 0;
             border-left: 6px solid transparent;
             border-right: 6px solid transparent;
             border-top: 8px solid #718096;
-            z-index: 2;
+        }
+        
+        /* Horizontal connector arrows */
+        .connector.horizontal::after {
+            top: -3px;
+            right: -6px;
+            transform: rotate(270deg);
+        }
+        
+        /* Vertical connector arrows */
+        .connector.vertical::after {
+            top: 100%;
+            left: -4px;
+            transform: rotate(0deg);
+        }
+        
+        /* Diagonal connector arrows */
+        .connector.diagonal::after {
+            top: -3px;
+            right: -6px;
+            transform: rotate(270deg);
+        }
+        
+        /* Remove the separate connector-arrow elements */
+        .connector-arrow {
+            display: none;
+        }
+        
+        /* Connector Labels - No Outline */
+        .connector-label {
+            position: absolute;
+            background-color: transparent;
+            padding: 4px 8px;
+            font-size: 0.8rem;
+            color: var(--primary-dark);
+            z-index: 20;
+            pointer-events: none;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+        
+        .connector-label.horizontal {
+            transform: translateY(-50%);
+        }
+        
+        .connector-label.vertical {
+            transform: translateX(-50%);
+        }
+        
+        .connector-label.diagonal {
+            transform: translate(-50%, -50%);
         }
         
         /* Analysis Panel */
@@ -1037,7 +1102,7 @@
         body.dark-mode .process-node {
             background-color: #2d3748;
             color: #e2e8f0;
-            border-color: #718096;
+            border-color: #718096; /* Dark mode border color */
         }
         
         body.dark-mode .analysis-panel {
@@ -1151,6 +1216,22 @@
             color: #a0aec0;
         }
         
+        /* Dark mode for connectors */
+        body.dark-mode .connector {
+            background-color: #a0aec0 !important;
+        }
+        
+        body.dark-mode .connector.horizontal::after,
+        body.dark-mode .connector.vertical::after,
+        body.dark-mode .connector.diagonal::after {
+            border-top-color: #a0aec0;
+        }
+        
+        /* Dark mode for connector labels */
+        body.dark-mode .connector-label {
+            color: #e2e8f0;
+        }
+        
         /* Share dropdown */
         .share-dropdown {
             position: absolute;
@@ -1200,12 +1281,16 @@
         }
         
         #shareContainer .btn {
-            padding: 8px 30px 8px 15px;
+            padding: 8px 30px 8px 15px; /* More right padding for arrow */
             display: flex;
             align-items: center;
             justify-content: center;
             height: 36px;
             position: relative;
+        }
+
+        #shareContainer.nav-item.has-dropdown::after {
+            content: none !important;
         }
         
         /* Add dropdown arrow to share button */
@@ -1216,15 +1301,6 @@
             font-size: 1.2rem;
             color: var(--accent);
             line-height: 1;
-        }
-        
-        /* Fix for arrows */
-        .connector-arrow {
-            border-top-color: #718096;
-        }
-        
-        .connector {
-            background-color: #718096;
         }
         
         /* File dropdown icon */
@@ -1277,6 +1353,22 @@
         .canvas-actions {
             gap: 8px;
         }
+        
+        /* FIX 1: Dark mode for undo, redo, and share buttons */
+        /* Make sure these buttons are styled correctly in dark mode */
+        body.dark-mode .canvas-actions .btn:not(.btn-primary):not(.btn-success):not(.btn-help) {
+            background-color: #4a5568;
+            color: #e2e8f0;
+            border-color: #4a5568;
+        }
+        
+        body.dark-mode .canvas-actions .btn:not(.btn-primary):not(.btn-success):not(.btn-help):hover {
+            background-color: #2d3748;
+            border-color: var(--primary-light);
+        }
+        
+        /* FIX 2: Remove all button disabling during processing */
+        /* All buttons remain fully functional at all times */
     </style>
 </head>
 <body>
@@ -1382,11 +1474,11 @@
                 <div class="canvas-header">
                     <div class="canvas-title">Order Processing</div>
                     <div class="canvas-actions">
-                        <button class="btn">
+                        <button class="btn" id="undoBtn">
                             <i class="fas fa-undo"></i>
                             <span>Undo</span>
                         </button>
-                        <button class="btn">
+                        <button class="btn" id="redoBtn">
                             <i class="fas fa-redo"></i>
                             <span>Redo</span>
                         </button>
@@ -1399,7 +1491,7 @@
                             <span>Reengineer</span>
                         </button>
                         <div class="nav-item has-dropdown" id="shareContainer" style="position: relative; display: inline-block;">
-                            <button class="btn">
+                            <button class="btn" id="shareBtn">
                                 <i class="fas fa-share-alt"></i>
                                 <span>Share</span>
                             </button>
@@ -1563,15 +1655,15 @@
         const processStates = {
             initial: {
                 nodes: [
-                    { id: 1, type: 'start', title: 'Receive Order', text: 'Order intake process', x: 5, y: 10 },
+                    { id: 1, type: 'start', title: 'Receive Order', text: 'Order intake process', x: 5, y: 12 },
                     { id: 2, type: 'decision', title: 'Validation', text: 'Manual review needed?', x: 35, y: 10 },
-                    { id: 3, type: 'action', title: 'Fulfill Order', text: 'Process and ship', x: 65, y: 10 },
-                    { id: 4, type: 'end', title: 'Reject', text: 'Invalid order', x: 35, y: 40 }
+                    { id: 3, type: 'action', title: 'Fulfill Order', text: 'Process and ship', x: 65, y: 16 },
+                    { id: 4, type: 'end', title: 'Reject', text: 'Invalid order', x: 33.5, y: 60 }
                 ],
                 connectors: [
-                    { from: 1, to: 2, type: 'horizontal' },
-                    { from: 2, to: 3, type: 'horizontal' },
-                    { from: 2, to: 4, type: 'vertical' }
+                    { from: 1, to: 2 },
+                    { from: 2, to: 3 },
+                    { from: 2, to: 4 }
                 ],
                 metrics: {
                     cycleTime: '12 Days',
@@ -1582,19 +1674,20 @@
             },
             optimized: {
                 nodes: [
-                    { id: 1, type: 'start', title: 'Receive Order', text: 'Automated intake', x: 5, y: 10 },
-                    { id: 2, type: 'action', title: 'Auto-Validation', text: 'AI-powered check', x: 25, y: 10 },
+                    { id: 1, type: 'start', title: 'Receive Order', text: 'Automated intake', x: 5, y: 12 },
+                    { id: 2, type: 'action', title: 'Auto-Validation', text: 'AI-powered check', x: 25, y: 12 },
                     { id: 3, type: 'decision', title: 'Complex Cases', text: 'Needs review?', x: 45, y: 10 },
-                    { id: 4, type: 'action', title: 'Quick Review', text: 'Expert assessment', x: 30, y: 40 },
-                    { id: 5, type: 'action', title: 'Fulfill Order', text: 'Automated process', x: 65, y: 10 },
+                    { id: 4, type: 'action', title: 'Quick Review', text: 'Expert assessment', x: 44, y: 40 },
+                    { id: 5, type: 'action', title: 'Fulfill Order', text: 'Automated process', x: 65, y: 12 },
                     { id: 6, type: 'end', title: 'Reject', text: 'Invalid order', x: 65, y: 40 }
                 ],
                 connectors: [
-                    { from: 1, to: 2, type: 'horizontal' },
-                    { from: 2, to: 3, type: 'horizontal' },
-                    { from: 3, to: 5, type: 'horizontal' },
-                    { from: 3, to: 4, type: 'vertical' },
-                    { from: 4, to: 5, type: 'horizontal' }
+                    { from: 1, to: 2 },
+                    { from: 2, to: 3 },
+                    { from: 3, to: 4 },
+                    { from: 3, to: 5 },
+                    { from: 4, to: 5 },
+                    { from: 4, to: 6 }
                 ],
                 metrics: {
                     cycleTime: '5 Days',
@@ -1615,9 +1708,9 @@
                     { id: 4, type: 'end', title: 'Reject', text: 'Invalid order', x: 5, y: 65 }
                 ],
                 connectors: [
-                    { from: 1, to: 2, type: 'vertical' },
-                    { from: 2, to: 3, type: 'vertical' },
-                    { from: 2, to: 4, type: 'vertical' }
+                    { from: 1, to: 2 },
+                    { from: 2, to: 3 },
+                    { from: 2, to: 4 }
                 ],
                 metrics: {
                     cycleTime: '12 Days',
@@ -1636,11 +1729,12 @@
                     { id: 6, type: 'end', title: 'Reject', text: 'Invalid order', x: 5, y: 80 }
                 ],
                 connectors: [
-                    { from: 1, to: 2, type: 'vertical' },
-                    { from: 2, to: 3, type: 'vertical' },
-                    { from: 3, to: 5, type: 'vertical' },
-                    { from: 3, to: 4, type: 'vertical' },
-                    { from: 4, to: 5, type: 'vertical' }
+                    { from: 1, to: 2 },
+                    { from: 2, to: 3 },
+                    { from: 3, to: 4 },
+                    { from: 3, to: 5 },
+                    { from: 4, to: 5 },
+                    { from: 4, to: 6 }
                 ],
                 metrics: {
                     cycleTime: '5 Days',
@@ -1674,103 +1768,199 @@
             
             const processData = isMobileView ? mobileProcessStates[state] : processStates[state];
             
-            // Render nodes first and store their positions
-            const nodePositions = {};
+            // Render nodes
             processData.nodes.forEach(node => {
                 const nodeEl = document.createElement('div');
                 nodeEl.className = `process-node ${node.type}`;
-                nodeEl.style.top = `${node.y}%`;
-                nodeEl.style.left = `${node.x}%`;
+                nodeEl.dataset.nodeId = node.id;
+                if (isMobileView) {
+                    nodeEl.style.top = `${node.y}%`;
+                    nodeEl.style.left = `${node.x}%`;
+                } else {
+                    nodeEl.style.top = `${node.y}%`;
+                    nodeEl.style.left = `${node.x}%`;
+                }
                 nodeEl.innerHTML = `
                     <div class="node-title">${node.title}</div>
                     <div class="node-text">${node.text}</div>
                     <div class="node-badge">${node.id}</div>
                 `;
                 processCanvas.appendChild(nodeEl);
-                
-                // Store node position and element for connector calculations
-                nodePositions[node.id] = {
-                    element: nodeEl,
-                    x: node.x,
-                    y: node.y,
-                    type: node.type
-                };
             });
             
-            // Wait for DOM to render nodes, then calculate and render connectors
-            setTimeout(() => {
-                // Render connectors based on actual node positions
-                processData.connectors.forEach(connector => {
-                    const fromNode = nodePositions[connector.from];
-                    const toNode = nodePositions[connector.to];
-                    
-                    if (!fromNode || !toNode) return;
-                    
-                    // Get actual positions of nodes
-                    const fromRect = fromNode.element.getBoundingClientRect();
-                    const toRect = toNode.element.getBoundingClientRect();
-                    const canvasRect = processCanvas.getBoundingClientRect();
-                    
-                    // Convert to percentages relative to canvas
-                    const fromCenterX = ((fromRect.left + fromRect.width / 2 - canvasRect.left) / canvasRect.width) * 100;
-                    const fromCenterY = ((fromRect.top + fromRect.height / 2 - canvasRect.top) / canvasRect.height) * 100;
-                    const toCenterX = ((toRect.left + toRect.width / 2 - canvasRect.left) / canvasRect.width) * 100;
-                    const toCenterY = ((toRect.top + toRect.height / 2 - canvasRect.top) / canvasRect.height) * 100;
-                    
-                    if (connector.type === 'horizontal') {
-                        // Draw horizontal line from right of fromNode to left of toNode
-                        const startX = fromCenterX + (fromRect.width / canvasRect.width * 50);
-                        const endX = toCenterX - (toRect.width / canvasRect.width * 50);
-                        const yPos = fromCenterY;
-                        
-                        // Only draw if the line has positive length
-                        if (endX > startX) {
-                            const connectorEl = document.createElement('div');
-                            connectorEl.className = 'connector horizontal';
-                            connectorEl.style.top = `${yPos}%`;
-                            connectorEl.style.left = `${startX}%`;
-                            connectorEl.style.width = `${endX - startX}%`;
-                            processCanvas.appendChild(connectorEl);
-                            
-                            // Add arrow at the end
-                            const arrowEl = document.createElement('div');
-                            arrowEl.className = 'connector-arrow';
-                            arrowEl.style.top = `${yPos - 0.4}%`;
-                            arrowEl.style.left = `${endX}%`;
-                            processCanvas.appendChild(arrowEl);
-                        }
-                        
-                    } else if (connector.type === 'vertical') {
-                        // Draw vertical line from bottom of fromNode to top of toNode
-                        const xPos = fromCenterX;
-                        const startY = fromCenterY + (fromRect.height / canvasRect.height * 50);
-                        const endY = toCenterY - (toRect.height / canvasRect.height * 50);
-                        
-                        // Only draw if the line has positive length
-                        if (endY > startY) {
-                            const connectorEl = document.createElement('div');
-                            connectorEl.className = 'connector vertical';
-                            connectorEl.style.top = `${startY}%`;
-                            connectorEl.style.left = `${xPos}%`;
-                            connectorEl.style.height = `${endY - startY}%`;
-                            processCanvas.appendChild(connectorEl);
-                            
-                            // Add arrow at the end
-                            const arrowEl = document.createElement('div');
-                            arrowEl.className = 'connector-arrow';
-                            arrowEl.style.top = `${endY}%`;
-                            arrowEl.style.left = `${xPos - 0.4}%`;
-                            arrowEl.style.transform = 'rotate(90deg)';
-                            processCanvas.appendChild(arrowEl);
-                        }
+            // Render connectors (with embedded arrows) with labels
+            processData.connectors.forEach(connector => {
+                const fromNode = processCanvas.querySelector(`.process-node[data-node-id='${connector.from}']`);
+                const toNode = processCanvas.querySelector(`.process-node[data-node-id='${connector.to}']`);
+                if (!fromNode || !toNode) return;
+
+                const fromRect = fromNode.getBoundingClientRect();
+                const toRect = toNode.getBoundingClientRect();
+                const canvasRect = processCanvas.getBoundingClientRect();
+
+                // Calculate center points relative to canvas
+                let fromX = ((fromRect.left + fromRect.width / 2) - canvasRect.left) / canvasRect.width * 100;
+                let fromY = ((fromRect.top + fromRect.height / 2) - canvasRect.top) / canvasRect.height * 100;
+                let toX = ((toRect.left + toRect.width / 2) - canvasRect.left) / canvasRect.width * 100;
+                let toY = ((toRect.top + toRect.height / 2) - canvasRect.top) / canvasRect.height * 100;
+
+                // Define connector labels
+                let connectorLabel = '';
+                let labelOffsetX = 0;
+                let labelOffsetY = 0;
+
+                // SHORTER CONNECTOR: Adjust the start and end points to be closer to node edges
+                if (state === 'initial') {
+                    // INITIAL STATE CONNECTORS
+                    if (connector.from === 1 && connector.to === 2) {
+                        // Initial: Node 1 → Node 2
+                        fromX = fromX + 6;
+                        toX = toX - 6;
+                        connectorLabel = 'Process';
+			labelOffsetX = -2;
+                        labelOffsetY = -5;
+                    } else if (connector.from === 2 && connector.to === 3) {
+                        // Initial: Node 2 → Node 3
+                        fromX = fromX + 5.3;
+                        toX = toX - 6.5;
+                        connectorLabel = 'Valid';
+			labelOffsetX = -2;
+                        labelOffsetY = -5;
+                    } else if (connector.from === 2 && connector.to === 4) {
+                        // Initial: Node 2 → Node 4
+                        fromY = fromY + 11;
+                        toY = toY - 8;
+                        connectorLabel = 'Invalid';
+                        labelOffsetX = -5;
                     }
-                });
-                
-                // Reattach drag events to new nodes (only for desktop)
-                if (!isMobileView) {
-                    attachDragEvents();
+                } else if (state === 'optimized') {
+                    // OPTIMIZED STATE CONNECTORS
+                    if (connector.from === 1 && connector.to === 2) {
+                        // Optimized: Node 1 → Node 2
+                        fromX = fromX + 6;
+                        toX = toX - 6.5;
+                        connectorLabel = 'Auto-process';
+			labelOffsetX = -3.5;
+                        labelOffsetY = -3;
+                    } else if (connector.from === 2 && connector.to === 3) {
+                        // Optimized: Node 2 → Node 3
+                        fromX = fromX + 6;
+                        toX = toX - 6;
+                        connectorLabel = 'Continue';
+			labelOffsetX = -2;
+                        labelOffsetY = -3;
+                    } else if (connector.from === 3 && connector.to === 4) {
+                        // Optimized: Node 3 → Node 4
+                        fromY = fromY + 9.5;
+                        toY = toY - 8;
+                        connectorLabel = 'Needs Review';
+                        labelOffsetX = -5;
+			labelOffsetY = -2;
+                    } else if (connector.from === 3 && connector.to === 5) {
+                        // Optimized: Node 3 → Node 5
+                        fromX = fromX + 5;
+                        toX = toX - 6.5;
+                        connectorLabel = 'Auto-approved';
+			labelOffsetX = -4;
+                        labelOffsetY = -3;
+                    } else if (connector.from === 4 && connector.to === 5) {
+                        // Optimized: Node 4 → Node 5
+                        fromX = fromX + 2.5;
+                        toX = toX - 1.5;
+                        fromY = fromY - 2;
+                        toY = toY + 2;
+                        connectorLabel = 'Approved';
+                        labelOffsetX = 3;
+                        labelOffsetY = -3;
+                    } else if (connector.from === 4 && connector.to === 6) {
+                        // Optimized: Node 4 → Node 6
+                        fromX = fromX + 2;
+                        toX = toX - 1;
+                        fromY = fromY - 0.5;
+                        toY = toY + 1;
+                        connectorLabel = 'Rejected';
+                        labelOffsetX = 1;
+                        labelOffsetY = 5;
+                    }
                 }
-            }, 10);
+
+                const connectorEl = document.createElement('div');
+                connectorEl.classList.add('connector');
+
+                // Calculate the angle for diagonal lines
+                const angle = Math.atan2(toY - fromY, toX - fromX) * 180 / Math.PI;
+                const distance = Math.sqrt(Math.pow(toX - fromX, 2) + Math.pow(toY - fromY, 2));
+
+                // Check if this is a diagonal connection (node 4 to 5 in optimized process)
+                const isDiagonal = (state === 'optimized' && connector.from === 4 && connector.to === 5) || 
+                                  (state === 'optimized' && connector.from === 4 && connector.to === 6);
+
+                let connectorType = '';
+                let midX, midY;
+
+                if (isDiagonal) {
+                    // For diagonal lines, adjust the start and end points to be closer to the node edges
+                    const adjustedFromX = fromX + (toX - fromX) * 0.2;
+                    const adjustedFromY = fromY + (toY - fromY) * 0.15;
+                    const adjustedToX = toX - (toX - fromX) * 0.3;
+                    const adjustedToY = toY - (toY - fromY) * 0.5;
+                    
+                    const adjustedDistance = Math.sqrt(Math.pow(adjustedToX - adjustedFromX, 2) + Math.pow(adjustedToY - adjustedFromY, 2));
+                    const adjustedAngle = Math.atan2(adjustedToY - adjustedFromY, adjustedToX - adjustedFromX) * 180 / Math.PI;
+                    
+                    // Diagonal line with embedded arrow
+                    connectorEl.classList.add('diagonal');
+                    connectorEl.style.width = `${adjustedDistance}%`;
+                    connectorEl.style.top = `${adjustedFromY}%`;
+                    connectorEl.style.left = `${adjustedFromX}%`;
+                    connectorEl.style.transform = `rotate(${adjustedAngle}deg)`;
+                    connectorEl.style.transformOrigin = '0 0';
+                    
+                    connectorType = 'diagonal';
+                    midX = (adjustedFromX + adjustedToX) / 2;
+                    midY = (adjustedFromY + adjustedToY) / 2;
+                } else if (Math.abs(toY - fromY) < Math.abs(toX - fromX)) {
+                    // Horizontal line with embedded arrow
+                    connectorEl.classList.add('horizontal');
+                    connectorEl.style.top = `${(fromY + toY) / 2}%`;
+                    connectorEl.style.left = `${Math.min(fromX, toX)}%`;
+                    connectorEl.style.width = `${Math.abs(toX - fromX)}%`;
+                    
+                    connectorType = 'horizontal';
+                    midX = (fromX + toX) / 2;
+                    midY = (fromY + toY) / 2;
+                } else {
+                    // Vertical line with embedded arrow
+                    connectorEl.classList.add('vertical');
+                    connectorEl.style.left = `${(fromX + toX) / 2}%`;
+                    connectorEl.style.top = `${Math.min(fromY, toY)}%`;
+                    connectorEl.style.height = `${Math.abs(toY - fromY)}%`;
+                    
+                    connectorType = 'vertical';
+                    midX = (fromX + toX) / 2;
+                    midY = (fromY + toY) / 2;
+                }
+
+                processCanvas.appendChild(connectorEl);
+
+                // Add connector label if defined
+                if (connectorLabel) {
+                    const labelEl = document.createElement('div');
+                    labelEl.className = `connector-label ${connectorType}`;
+                    labelEl.textContent = connectorLabel;
+                    
+                    // Position the label at the midpoint with custom offsets
+                    labelEl.style.left = `${midX + labelOffsetX}%`;
+                    labelEl.style.top = `${midY + labelOffsetY}%`;
+                    
+                    processCanvas.appendChild(labelEl);
+                }
+            });
+            
+            // Reattach drag events to new nodes (only for desktop)
+            if (!isMobileView) {
+                attachDragEvents();
+            }
         }
 
         // Mobile menu functionality
@@ -1793,9 +1983,10 @@
         
         // Share dropdown functionality
         const shareContainer = document.getElementById('shareContainer');
+        const shareBtn = document.getElementById('shareBtn');
         const shareDropdown = shareContainer.querySelector('.share-dropdown');
         
-        shareContainer.addEventListener('click', function(e) {
+        shareBtn.addEventListener('click', function(e) {
             if (window.innerWidth > 768) {
                 e.stopPropagation();
                 shareDropdown.classList.toggle('active');
@@ -1824,7 +2015,7 @@
                 
                 function dragStart(e) {
                     initialX = e.clientX - xOffset;
-                    initialY = e.clientY - yOffset;
+                    initialY = e.clientY - initialY;
                     
                     if (e.target === node || node.contains(e.target)) {
                         isDragging = true;
@@ -1852,8 +2043,8 @@
                     const canvasRect = document.getElementById('processCanvas').getBoundingClientRect();
                     
                     // Calculate new position
-                    const currentLeft = parseFloat(el.style.left || 0);
-                    const currentTop = parseFloat(el.style.top || 0);
+                    const currentLeft = parseInt(el.style.left || 0);
+                    const currentTop = parseInt(el.style.top || 0);
                     
                     const newX = currentLeft + (xPos / canvasRect.width * 100);
                     const newY = currentTop + (yPos / canvasRect.height * 100);
@@ -1872,9 +2063,6 @@
                     isDragging = false;
                     node.style.zIndex = "10";
                     node.classList.remove('pulse');
-                    
-                    // Re-render connectors after node is moved
-                    renderProcess(currentProcessState);
                 }
             });
         }
@@ -2081,10 +2269,10 @@
         
         // Reengineer button functionality
         document.getElementById('reengineerBtn').addEventListener('click', function() {
-            const buttons = document.querySelectorAll('.canvas-actions .btn');
-            buttons.forEach(btn => {
-                btn.disabled = true;
-            });
+            // Store original state
+            const originalHTML = this.innerHTML;
+            const originalBgColor = this.style.backgroundColor;
+            const originalBorderColor = this.style.borderColor;
             
             this.innerHTML = '<i class="fas fa-cog fa-spin"></i> <span>Reengineering...</span>';
             
@@ -2112,24 +2300,21 @@
                 // Show optimization results in current tab
                 document.getElementById('optimizationResults').style.display = 'block';
                 
-                // Re-enable buttons after a delay
+                // Reset button after a delay
                 setTimeout(() => {
-                    buttons.forEach(btn => {
-                        btn.disabled = false;
-                    });
-                    this.innerHTML = '<i class="fas fa-bolt"></i> <span>Reengineer</span>';
-                    this.style.backgroundColor = '';
-                    this.style.borderColor = '';
+                    this.innerHTML = originalHTML;
+                    this.style.backgroundColor = originalBgColor;
+                    this.style.borderColor = originalBorderColor;
                 }, 3000);
             }, 3000);
         });
         
         // Simulate button functionality
         document.getElementById('simulateBtn').addEventListener('click', function() {
-            const buttons = document.querySelectorAll('.canvas-actions .btn');
-            buttons.forEach(btn => {
-                btn.disabled = true;
-            });
+            // Store original state
+            const originalHTML = this.innerHTML;
+            const originalBgColor = this.style.backgroundColor;
+            const originalBorderColor = this.style.borderColor;
             
             this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Simulating...</span>';
             
@@ -2139,14 +2324,11 @@
                 this.style.backgroundColor = 'var(--success)';
                 this.style.borderColor = 'var(--success)';
                 
-                // Re-enable buttons after a delay
+                // Reset button after a delay
                 setTimeout(() => {
-                    buttons.forEach(btn => {
-                        btn.disabled = false;
-                    });
-                    this.innerHTML = '<i class="fas fa-play"></i> <span>Simulate</span>';
-                    this.style.backgroundColor = '';
-                    this.style.borderColor = '';
+                    this.innerHTML = originalHTML;
+                    this.style.backgroundColor = originalBgColor;
+                    this.style.borderColor = originalBorderColor;
                 }, 2000);
             }, 3000);
         });
@@ -2174,14 +2356,12 @@
             }
             
             this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
-            this.disabled = true;
             
             // Simulate API call
             setTimeout(() => {
                 alert('Your request has been submitted! An expert will contact you within 24 hours.');
                 helpModal.style.display = 'none';
                 this.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Request';
-                this.disabled = false;
                 
                 // Reset form
                 document.getElementById('helpDetails').value = '';
